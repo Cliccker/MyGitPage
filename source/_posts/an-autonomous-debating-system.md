@@ -94,7 +94,7 @@ AKB中的文本可以是手动构建的，也可以是由机器抽取然后人�
 
 ### 组织语言
 
+**组织语言**虽然容易让我想起这个表情包<img src="https://my-picbed.oss-cn-hangzhou.aliyuncs.com/img/20210321153001.jpg" alt="组织语言" style="zoom:50%;" />但是我真的找不到更合适的词了。
 
-
-**组织语言**虽然容易让我想起这个表情包<img src="http://img.rcbqb.com/dt/h0bz44rmwxf.jpg" alt="试图组织语言" style="zoom:50%;" />但是我真的找不到更合适的词了。
+组织语言模块是一个集成了聚类分析的基于规则的系统,，他的工作流程如下：
 
