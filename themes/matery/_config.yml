@@ -136,7 +136,7 @@ socialLink:
   qq: 760848310
   weibo: "https://weibo.com/JIANDABIAN"
   zhihu: "https://www.zhihu.com/people/voyage_meng"
-  rss: true # true、false
+  rss: false # true、false
 
 # Whether to activate the Post TOC, and Configure which title types are supported by TOC support.
 # You can add `toc: false` to the Front-matter of a post to turn off the TOC.
@@ -382,11 +382,11 @@ googleAnalytics:
 # Add baidu analytics configuration
 # 添加 baidu Analytics 配置
 baiduAnalytics:
-  enable: false
+  enable: true
   id: 82f216654f4a440fecc94c125ca3b2be
 
 # 百度搜索资源平台提交链接
-baiduPush: false
+baiduPush: true
 
 # The used front-end library can be replaced with the corresponding CDN address as needed,
 # If the specific version is not specified below, you can use the latest version.
