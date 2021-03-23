@@ -2,6 +2,10 @@
 <html lang="<%= config.language %>">
 <%- partial('_partial/head') %>
 
+<% if (theme.background.enable) { %>
+   <%- partial('_partial/background') %>
+<% } %>
+
 <body>
     <%- partial('_partial/header') %>
     <%- body %>
@@ -16,7 +20,7 @@
     <script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.aos) %>"></script>
     <script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.scrollProgress) %>"></script>
     <script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.lightgallery) %>"></script>
-    <script src="<%- theme.jsDelivr.url %><%- url_for('/js/matery.js') %>"></script>
+    <script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.matery) %>"></script>
 
     <%- partial('_partial/baidu-analytics') %>
     <%- partial('_partial/baidu-push') %>
@@ -78,6 +82,12 @@
     </script>
     <% } %>
 
+    <!--腾讯兔小巢-->
+    <% if (theme.tuxiaochao.enable) { %>
+        <div style="position:fixed;bottom:125px;right:16px;cursor: pointer;">
+            <a title="兔小巢" href="https://support.qq.com/products/<%- theme.tuxiaochao.productId %>"><i class="fa fa-comments fa-3x"  aria-hidden="true"></i></a>
+        </div>
+    <%}%>
     <% if (theme.canvas_nest.enable) { %>
     <script type="text/javascript" color="<%- theme.canvas_nest.color %>"
         pointColor="<%- theme.canvas_nest.pointColor %>" opacity='<%- theme.canvas_nest.opacity %>'
@@ -98,30 +108,6 @@
     <% if (theme.instantpage.enable) { %>
     <script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.instantpage) %>" type="module"></script>
     <% } %>
-<div id="weather-v2-plugin-simple"></div>
-<script>
-    WIDGET = {
-        CONFIG: {
-            "modules": "01234",
-            "background": 5,
-            "tmpColor": "4A4A4A",
-            "tmpSize": 16,
-            "cityColor": "4A4A4A",
-            "citySize": 16,
-            "aqiSize": 16,
-            "weatherIconSize": 24,
-            "alertIconSize": 18,
-            "padding": "10px 10px 10px 10px",
-            "shadow": "1",
-            "language": "auto",
-            "borderRadius": 5,
-            "fixed": "false",
-            "vertical": "middle",
-            "horizontal": "center",
-            "key": "9MslpRZgtH"
-        }
-    }
-</script>
 <script src="https://apip.weatherdt.com/simple/static/js/weather-simple-common.js?v=2.0"></script>
 </body>
 
