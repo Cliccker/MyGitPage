@@ -28,8 +28,9 @@ summary: 上一篇论文没有讲Project Debater是依靠哪些技术来实现�
 
 1. 针对声明，采用交叉验证（Cross Validation）的方法，具体如图
 
-   ![交叉验证](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/img/20210329212326.png)
+   ![交叉验证](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/img/20210329212326.png) 
 
    在每一轮中，除不考虑的动议之外，对其他动议中声明的分数以降序排列，找到能够满足准确度在$k\%$以上的**最小分数**作为该轮的$threshold_k$，最后求取所有$threshold_k$的中位数，作为整体的$threshold_k$。
 
 2. 针对证据文本
+
