@@ -116,3 +116,24 @@ summary: 上一篇论文没有讲Project Debater是依靠哪些技术来实现�
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | “Scientists have abundant evidence that birth control has significant health benefits for women and their families, is documented to significantly reduce health costs, and is the most commonly taken drug in America by young and middleaged women,” **U.S. Department of Health and Human Services Secretary Kathleen Sebelius said in a 2012 statement.** | **U.S. Department of Health and Human Services Secretary Kathleen Sebelius said in a 2012 statement that** “Scientists have abundant evidence that birth control has significant health benefits for women and their families, is documented to significantly reduce health costs, and is the most commonly taken drug in America by young and middle-aged women”. |
 
+## 论述生成
+
+完整的论述主要由两部分组成，包括
+
+1. 一系列不同类别的段落；
+2. 决定何时插入这些段落、判断不同段落优先级的规则。
+
+关于不同类别的段落，文章中举出了一个比较重要的例子：包含思想论点簇（clusters of minded arguments）的段落，具体到如何将这些段落转化成论述的流程，如图所示：
+
+![Generation](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/img/20210330144852.png)
+
+最后，完整的论述由一个**事先定义好的模板**进行生成，包括开场、反驳、总结三个部分。文章中也给出了这些模板的形式，我这就不写了！
+
+# 总结
+
+这并不是一个通用的语言生成系统，作者对许多地方都定义了各种规则。但是还有比较多的处理方式可以供我们学习，简单罗列一下：
+
++ 交叉验证（Cross Validation）方法确定阈值；
++ **线性回归模型**拟合阈值；
++ IClust、Wikifier、WORT ；
++ 使用超几何分布来判断聚类中某种元素的富集程度。
