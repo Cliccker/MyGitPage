@@ -5,10 +5,11 @@ tags:
   - AI
   - 辩论
   - 读论文
-date: 2021-03-29 09:50:54
 mathjax: true
 categories: 学习
 summary: 上一篇论文没有讲Project Debater是依靠哪些技术来实现组织语言的，我们在这一篇好好讲
+abbrlink: a288
+date: 2021-03-29 09:50:54
 ---
 
 # Project Debater的论述生成模块
