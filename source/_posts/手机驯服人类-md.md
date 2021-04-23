@@ -1,5 +1,5 @@
 ---
-title: 手机是如何驯服人类的？.md
+title: 手机是如何驯服人类的？
 author: Hank
 tags:
   - 手机
