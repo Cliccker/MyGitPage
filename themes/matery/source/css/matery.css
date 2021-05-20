@@ -96,7 +96,7 @@ hr {
 }
 
 blockquote {
-    border-left: 5px solid #42b983;
+    border-left: 5px solid #22a2c3;
     padding: 1rem 0.8rem 0.2rem 0.8rem;
     color: #666;
     background-color: rgba(66, 185, 131, .1);
@@ -118,8 +118,8 @@ pre {
     top: 0;
     left: 12px;
     margin-top: 12px;
-    -webkit-box-shadow: 20px 0 #ffbd2e, 40px 0 #27c93f;
-    box-shadow: 20px 0 #ffbd2e, 40px 0 #27c93f;
+    -webkit-box-shadow: 20px 0 #ffbd2e, 40px 0 #22a2c3;
+    box-shadow: 20px 0 #ffbd2e, 40px 0 #22a2c3;
 }
 
 code {
@@ -852,7 +852,7 @@ article a {
 
 article a:hover {
     font-weight: bold;
-    color: #42b983;
+    color: #126bae;
     text-decoration: underline;
 }
 
@@ -1035,7 +1035,7 @@ article .article-tags .chip {
     border-radius: 15px;
     margin-right: 5px;
     margin-bottom: 2px;
-    color: #42b983;
+    color: #126bae;
     background: #fff;
     border: 1px solid;
     transition: all 0.6s ease-in-out;
@@ -1043,17 +1043,17 @@ article .article-tags .chip {
 
 #artDetail .tag_share .article-tag .chip:hover {
     color: #fff;
-    background: #42b983;
+    background: #126bae;
 }
 
 #artDetail .post-cate {
     float: right;
-    color: #42b983;
+    color: #126bae;
 }
 
 #artDetail .post-cate a {
     padding-right: 5px;
-    color: #42b983;
+    color: #126bae;
     font-weight: 500;
 }
 
@@ -1072,7 +1072,7 @@ article .article-tags .chip {
 
 #artDetail .post-info .post-category:hover {
     font-weight: bold;
-    color: #42b983;
+    color: #126bae;
     text-decoration: underline;
 }
 
@@ -1134,7 +1134,7 @@ article .article-tags .chip {
 
 #artDetail .reprint a {
     font-size: 1.05rem;
-    color: #42b983;
+    color: #126bae;
     font-weight: 500;
 }
 
@@ -1150,7 +1150,7 @@ article .article-tags .chip {
 
 #articleContent a {
     padding: 0 2px;
-    color: #42b983;
+    color: #126bae;
     font-weight: 500;
     text-decoration: underline;
     word-wrap: break-word;
@@ -1563,7 +1563,7 @@ table tr:nth-child(2n), thead {
 }
 
 .post-statis .statis .count a {
-    color: #42b983;
+    color: #126bae;
 }
 
 .post-statis .statis .name {
@@ -1823,7 +1823,7 @@ footer .copy-right {
 
 .search-result-list .search-result-title {
     font-size: 1.4rem;
-    color: #42b983;
+    color: #126bae;
 }
 
 .search-result-list li {
