@@ -17,13 +17,13 @@ summary: 花了一晚上熟悉了Quicker的动作编辑，写了一个笔记工�
 
 我一直不遗余力的向身边的同学安利Quicker，因为它给我带来了巨大的效率提升，而且我不必为了OCR装OCR软件，为了划词翻译而装划词翻译软件，各种功能都能在Quciker中实现🤣
 ## 关于flomo
-[flomo · 浮墨笔记](https://flomoapp.com/)是我的女朋友跟我推荐的一款笔记工具，说实在笔记工具我见得多了，语雀虽然已经很好的帮我储存了我的文章，但却有着十分糟糕的速记体验，而Flomo相比于语雀“知识库”的定位，更像是一个“灵感库”，用卡片记录思考，用标签分类卡片，非常适用于速记和回顾。
+[flomo · 浮墨笔记](https://flomoapp.com/)是我的女朋友跟我推荐的一款笔记工具，语雀虽然已经很好的帮我储存了我的文章，但却有着十分糟糕的速记体验，而Flomo相比于语雀“知识库”的定位，更像是一个“灵感库”，用卡片记录思考，用标签分类卡片，非常适用于速记和回顾。
 
 ![flomo的多端体验](https://flomo.oss-cn-shanghai.aliyuncs.com/resource/home/202103/pic_feature_product.png)
 
 ## 关于QuickFlomo
 
-产生编辑这个Quciker动作的想法主要来于**我女朋友在用flomo！**，其次就是flomo提供的API让我觉得应该有更多的有趣的玩法。来看看我这个小工具的食用指南吧😊
+产生编辑这个Quicker动作的想法主要来于**我女朋友在用flomo！**，其次就是flomo提供的API让我觉得应该有更多的有趣的玩法。来看看我这个小工具的食用指南吧😊
 
 <img src="https://flomo.oss-cn-shanghai.aliyuncs.com/resource/home/202103/pic_feature_api.png" alt="flomo的API" style="zoom:50%;" />
 
@@ -94,4 +94,6 @@ summary: 花了一晚上熟悉了Quicker的动作编辑，写了一个笔记工�
 如果你的快捷键还有空余的话，可以右键QuickFlomo→信息→全局快捷键，给QucikFlomo绑定一个快捷键，这样就可以不用调出Quicker界面直接使用该动作了。
 
 做完这个动作写完使用指南，已经两点多了，赶紧洗漱睡觉😪
+
+洗漱完搜了一下原来Quciker上已经有人分享了flomo的相关动作，而且写的比我多，学习一下人家的，再加一点新的功能进去吧！晚安~
 
