@@ -82,11 +82,11 @@ summary: 花了一晚上熟悉了Quicker的动作编辑，写了一个笔记工�
 
 不选择任何文字直接点击flomoNOW会启动创作模式，输入方式和flomo一样。
 
-<img src="https://my-picbed.oss-cn-hangzhou.aliyuncs.com/img/20210523014741.png" alt="创作模式" style="zoom:80%;" />
+![创作模式](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/img/20210523221038.png)
 
 #### 🎈Tips
 
-+ 默认Tag不会作用于该模式
++ 可以使用打开文件功能导入txt文件的内容~
 
 ### OCR模式
 
@@ -94,7 +94,7 @@ summary: 花了一晚上熟悉了Quicker的动作编辑，写了一个笔记工�
 
 OCR模式的使用方式也十分简单，具体为：
 
-右键flomoNOW→OCR模式→选取识别区域→编辑识别结果（修改错误，增加tag）→关闭窗口。
+右键flomoNOW→OCR模式→选取识别区域→编辑识别结果（修改错误，增加tag）→完成编辑。
 
 #### 🎈Tips
 
@@ -110,5 +110,5 @@ OCR模式的使用方式也十分简单，具体为：
 
 ## 更新日志
 
-+ 5.23 添加了OCR模式，更改了一些说明和图片，更改动作名称和图标
++ 5.23 添加了OCR模式，更改了一些说明和图片，更改动作名称和图标，更新创作模式的交互
 
