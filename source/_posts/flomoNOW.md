@@ -39,7 +39,7 @@ summary: 花了一晚上熟悉了Quicker的动作编辑，写了一个笔记工�
 
 选择将动作复制到剪贴板，在Quicker主界面的空白按钮处右键，选择**粘贴分享的动作**
 
-<img src="C:/Users/76084/AppData/Roaming/Typora/typora-user-images/image-20210523194938081.png" alt="安装动作" style="zoom:50%;" />
+<img src="https://my-picbed.oss-cn-hangzhou.aliyuncs.com/img/20210524094708.png" alt="安装动作" style="zoom:50%;" />
 
 ### 获取你的flomo API
 
