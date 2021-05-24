@@ -1,5 +1,5 @@
 ---
-title: flomoNOW——快速创建flomo笔记
+title: flomo NOW——快速创建flomo笔记
 author: Hank
 tags:
   - Quicker
@@ -21,19 +21,21 @@ summary: 花了一晚上熟悉了Quicker的动作编辑，写了一个笔记工�
 
 ![flomo的多端体验](https://flomo.oss-cn-shanghai.aliyuncs.com/resource/home/202103/pic_feature_product.png)
 
-## 关于flomoNOW
+## 关于flomo NOW
 
 产生编辑这个Quicker动作的想法主要来于**我女朋友在用flomo！**，其次就是flomo提供的API让我觉得应该有更多的有趣的玩法。来看看我这个小工具的食用指南吧😊
 
 <img src="https://flomo.oss-cn-shanghai.aliyuncs.com/resource/home/202103/pic_feature_api.png" alt="flomo的API" style="zoom:50%;" />
 
-## flomoNOW食用指南
+🎈如果你还没有flomo账号，可以试着注册一下，这里是我的邀请码`ODE3NjM`
+
+## flomo NOW食用指南
 
 ### 软件下载&动作安装
 
 在[Quicker](https://getquicker.net/)的主页下载并安装适合你的Quick版本，下载完成后记得设置你的Quicker**快捷键**，比如我的快捷键是鼠标侧键。使用快捷键可以快速地调出Quicker的界面或者快速使用特定的动作。另外，建议保持Quiker开机运行。
 
-接下来在动作库中搜索“flomoNOW”或者直接点击[链接](https://getquicker.net/Sharedaction?code=d8de6a72-bc82-4c7d-32f5-08d91d10afcd&fromMyShare=true)跳转到本动作的页面
+接下来在动作库中搜索“flomo NOW”或者直接点击[链接](https://getquicker.net/Sharedaction?code=d8de6a72-bc82-4c7d-32f5-08d91d10afcd&fromMyShare=true)跳转到本动作的页面
 
 ![每次更新动作都会审核……](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/img/20210523194812.png)
 
@@ -55,24 +57,24 @@ summary: 花了一晚上熟悉了Quicker的动作编辑，写了一个笔记工�
 
 ### 初始化
 
-初次使用flomoNOW会提醒你输入flomo的API以及默认的标签，其中
+初次使用flomo NOW会提醒你输入flomo的API以及默认的标签，其中
 
 + API为上文提到的网址；
 + 多个标签之间可以使用空格进行分隔。
 
 ### 划词模式
 
-在划词模式下，我们选中一段文本，调出Quicker主界面，再点击flomoNOW，所选文字就直接保存到了你的flomo中了，只需三步。
+在划词模式下，我们选中一段文本，调出Quicker主界面，再点击flomo NOW，所选文字就直接保存到了你的flomo中了，只需三步。
 
 <img src="https://my-picbed.oss-cn-hangzhou.aliyuncs.com/img/20210523195843.png" alt="划词模式使用步骤" style="zoom:80%;" />
 
-你还可以右键flomoNOW打开自己的flomo主页，查看自己保存的笔记，或者使用flomo的界面保存图片（目前flomo的API还不支持图片）
+你还可以右键flomo NOW打开自己的flomo主页，查看自己保存的笔记，或者使用flomo的界面保存图片（目前flomo的API还不支持图片）
 
 <img src="https://my-picbed.oss-cn-hangzhou.aliyuncs.com/img/20210523200042.png" alt="打开个人主页" style="zoom:80%;" />
 
-#### 🎈Tips
+#### Tips
 
-+ 划词模式下，所有笔记都使用默认Tag，可以右键动作→配置信息进行修改
++ 划词模式下，所有笔记都使用默认Tag，可以右键动作→配置信息进行修改。
 
 + 在网页中时，划词模式会返回该网页的网址，结构如下图
 
@@ -80,25 +82,23 @@ summary: 花了一晚上熟悉了Quicker的动作编辑，写了一个笔记工�
 
 ### 创作模式
 
-不选择任何文字直接点击flomoNOW会启动创作模式，输入方式和flomo一样。
+不选择任何文字直接点击flomo NOW会启动创作模式，输入方式和flomo一样。
 
-![创作模式](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/img/20210523221038.png)
+<img src="https://my-picbed.oss-cn-hangzhou.aliyuncs.com/img/20210524165730.png" alt="创作模式" style="zoom: 80%;" />
 
-#### 🎈Tips
 
-+ 可以使用打开文件功能导入txt文件的内容~
 
-### OCR模式
+#### 文字识别
 
-想做这个模式的原因主要有两个，第一是有时候我会用电脑端的微信读书~~摸鱼~~；其次是有些文字内容可能本来就是图片，比如微博的长图。这时候就需要动用OCR识别文字了，由于使用的是基础版OCR，不能保证识别的准确性，所以我还添加了文本编辑功能。
+想做这个功能的原因主要有两个，第一是有时候我会用电脑端的微信读书~~摸鱼~~；其次是有些文字内容可能本来就是图片，比如微博的长图。这时候就需要动用OCR识别文字了，由于使用的是基础版API，**不能保证识别的准确性**。
 
-OCR模式的使用方式也十分简单，具体为：
+OCR模式的使用方式也十分简单，在创作模式中点击文本识别→框选想要识别的文字→修改结果（修改错误，添加标签）→完成，编辑框中的文字就会变为识别结果，你可以在此基础上进行修改。
 
-右键flomoNOW→OCR模式→选取识别区域→编辑识别结果（修改错误，增加tag）→完成编辑。
+#### 可写的事
 
-#### 🎈Tips
+算是一个彩蛋吧，灵感来自于《642件可写的事》，这本书我买了之后一篇都没有写...试着把它搬到了flomo NOW中，看看能不能激励一下创作
 
-+ 基础的OCR无法准确地识别手写文字或者过于模糊的文字，如果有需要我后面会增加专业的识别API。
+点击创作模式对话框中💡可写的事，可以看到三个选项**随机**、**添加**。“随机”会给你一个标签，这个标签将会告诉你这次写作的主题；“添加”则可以向标签池中添加自定义的标签。初始的标签池只有20个主题，后续会补充更多。
 
 ### 针对个别软件的优化（待增加）
 
@@ -106,9 +106,10 @@ OCR模式的使用方式也十分简单，具体为：
 
 ### 快捷键（可选的）
 
-如果你的快捷键还有空余的话，可以右键flomoNOW→信息→全局快捷键，给QucikFlomo绑定一个快捷键，这样就可以不用调出Quicker界面直接使用该动作了（仅限划词模式和创作模式）
+如果你的快捷键还有空余的话，可以右键flomo NOW→信息→全局快捷键，给flomo NOW绑定一个快捷键，这样就可以不用调出Quicker界面直接使用该动作了（仅限划词模式和创作模式）
 
 ## 更新日志
 
-+ 5.23 添加了OCR模式，更改了一些说明和图片，更改动作名称和图标，更新创作模式的交互
++ 5.23 添加了OCR模式，更改了一些说明和图片，更改动作名称和图标，更新创作模式的交互。
++ 5.24 更改OCR模式的交互入口，增加“可写的事”，随机生成一个可以展开叙述的主题。
 
