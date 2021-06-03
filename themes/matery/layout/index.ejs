@@ -49,10 +49,11 @@
                                                     <div class="card"> <a href="<%- url_for(post.path) %>">
                                                             <div class="card-image card-image-V">
                                                                 <div class="box-content">
-                                                                    <h3 class="title">阅读全文</h3> <span class="post"
+                                                                    <h3 class="title">阅读全文</h3> 
+                                                                    <!-- <span class="post"
                                                                         style="width: 180px">
                                                                         <%= post.title %>
-                                                                    </span>
+                                                                    </span> -->
                                                                 </div>
                                                                 <% if (post.img) { %> <img
                                                                         src="<%- url_for(post.img) %>"
@@ -67,9 +68,10 @@
                                                                                 src="<%- theme.jsDelivr.url %><%- url_for(featureimg) %>"
                                                                                 class="responsive-img"
                                                                                 alt="<%= post.title %>">
-                                                                            <% } %> <span class="card-title title-V">
+                                                                            <% } %> 
+                                                                            <!-- <span class="card-title title-V">
                                                                                     <%= post.title %>
-                                                                                </span>
+                                                                                </span> -->
                                                             </div>
                                                         </a>
                                                         <div class="card-content article-content">
