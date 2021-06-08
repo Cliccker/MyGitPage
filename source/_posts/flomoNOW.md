@@ -19,13 +19,13 @@ summary: 花了一晚上熟悉了Quicker的动作编辑，写了一个笔记工�
 ## 关于flomo
 [flomo · 浮墨笔记](https://flomoapp.com/)是我的女朋友跟我推荐的一款笔记工具，语雀虽然已经很好的帮我储存了我的文章，但却有着十分糟糕的速记体验，而flomo相比于语雀“知识库”的定位，更像是一个“灵感库”，用卡片记录思考，用标签分类卡片，非常适用于速记和回顾。
 
-![flomo的多端体验](https://flomo.oss-cn-shanghai.aliyuncs.com/resource/home/202103/pic_feature_product.png)
+![flomo的多端体验](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/%E5%9B%BE%E7%89%87.png)
 
 ## 关于flomo NOW
 
-产生编辑这个Quicker动作的想法主要来于**我女朋友在用flomo！**，其次就是flomo提供的API让我觉得应该有更多的有趣的玩法。来看看我这个小工具的食用指南吧😊
+产生编辑这个Quicker动作的想法主要来于**我女朋友在用flomo！**
 
-<img src="https://flomo.oss-cn-shanghai.aliyuncs.com/resource/home/202103/pic_feature_api.png" alt="flomo的API" style="zoom:50%;" />
+其次就是flomo提供的API让我觉得应该有更多的有趣的玩法。来看看我这个小工具的食用指南吧😊
 
 🎈如果你还没有flomo账号，可以试着注册一下，这里是我的邀请码`ODE3NjM`
 
@@ -107,10 +107,6 @@ summary: 花了一晚上熟悉了Quicker的动作编辑，写了一个笔记工�
 > 这个想法来源于各种游戏的成就系统以及flomo分享下的关于memo个数和使用天数描述，想让大家感受到使用flomo NOW记录笔记的频率，或许也能激励大家更多的思考和记录。
 
 memo计数功能默认是开启的，你会在动作右上角看到memo计数的角标。当然，如果你不喜欢它，可以在配置中关闭。
-
-### 针对个别软件的优化（待增加）
-
-[宋五八](https://getquicker.net/User/Actions/64068-宋五八)的动作[flomo快速添加](https://getquicker.net/Sharedaction?code=65e9bd9e-ef03-42ba-a1f1-08d89ff18571)给了我灵感，他为微信、网易云音乐和QQ音乐等软件做了适配，实现了更多的玩法。或许我后续也可试试看。
 
 ### 快捷键（可选的）
 
