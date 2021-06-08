@@ -63,8 +63,8 @@ cover:
 dream:
   enable: true
   showTitle: true
-  title: 今天我们写点什么呢？
-  text: 写下来就知道了。
+  title: 你觉得人生的终极目标是什么呢？
+  text: 追求内心的平和。
 
 # Whether to display the musics.
 # 是否在首页显示音乐.
@@ -134,7 +134,7 @@ socialLink:
   facebook: # https://www.facebook.com/xxx
   twitter: # https://twitter.com/xxx
   qq: 760848310
-  weibo: "https://weibo.com/JIANDABIAN"
+  weibo: 
   zhihu: "https://www.zhihu.com/people/voyage_meng"
   rss: true # true、false
 
@@ -201,8 +201,8 @@ clicklove:
 # 在”关于”页面中配置个人信息，包括头像、职业和个人介绍.
 profile:
   avatar: /medias/avatar.jpg
-  career: 还是学生，永远是学生
-  introduction: 三言两语概括不了我~
+  career: 职业规划是AI产品
+  introduction: 🤯喜欢头脑风暴🤪不是很聪明🤣却很真诚
 
 # config my projects informations in about page.
 # If you don't want to display this `My Projects` content, you can deactivate or delete this configuration.
