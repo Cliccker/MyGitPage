@@ -12,7 +12,9 @@
     "version": "4.2.1"
   },
   "dependencies": {
+    "-": "0.0.1",
     "bulma-stylus": "^0.8.0",
+    "g": "^2.0.1",
     "hexo": "^4.2.1",
     "hexo-abbrlink": "^2.2.1",
     "hexo-component-inferno": "^0.4.0",
