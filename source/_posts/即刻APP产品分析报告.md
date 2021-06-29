@@ -64,4 +64,4 @@ date: 2021-05-09 21:56:37
 
 # 2.即刻产品架构
 
-![即刻的产品架构](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/20210629200230.png)
+![即刻的产品架构](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/20210629200539.png)
