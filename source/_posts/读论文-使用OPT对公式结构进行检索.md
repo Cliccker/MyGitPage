@@ -1,6 +1,7 @@
 ---
 title: 读论文——Structural Similarity Search for Formulas Using Leaf-Root Paths in Operator Subtrees
 author: Hank
+mathjax: true
 tags:
   - 公式检索
   - 操作数
@@ -46,7 +47,7 @@ summary: 本文描述了如何使用操作树来对公式进行相似度检索�
 
 为了描述结构匹配的方式，作者给出了如下的定义
 
-#### 定义1 公共子树
+### 定义1 公共子树
 
 公式树$Tq$和$T_d$，他们的公共子树包含两个部分，即这两个公式中结构一致的子树$\hat{T}_q$和$\hat{T}_d$，且子树的叶节点为公式树的叶节点。用公式可以表达为：
 $$
@@ -54,5 +55,26 @@ C F S\left(T_{q}, T_{d}\right)=\left\{\hat{T}_{q}, \hat{T}_{d}: \hat{T}_{q} \pre
 $$
 其中$“\cong”$表示同构，$“\subseteq”$表示从属关系，而$“\preceq_{l}”$表示子树的叶节点为操作树的叶节点，用图片来说明
 
-![CFF](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/20210718205009.png)
+![公共子树与公共字数森林](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/20210719094848.png)
 
+### 定义2 公共子树森林
+
+公共子树森林（ommon formula forest）是所有**不相连**的公共子树的集合，一个公共子树森林可以用公式表示为：
+$$
+\pi=\left\{\left(\hat{T}_{q}^{1}, \hat{T}_{d}^{1}\right),\left(\hat{T}_{q}^{2}, \hat{T}_{d}^{2}\right), \ldots\left(\hat{T}_{q}^{n}, \hat{T}_{d}^{n}\right)\right\} \in \Pi\left(T_{q}, T_{d}\right)
+$$
+两个表达式之间可能存在多个不同的公共子树森林，都属于$\Pi\left(T_{q}, T_{d}\right)$。
+
+公共子树森林可以表示两个数学表达式中的相似部分，那如何**度量**这个相似性呢？
+
+### 定义3 度量相似度
+
+$$
+\Gamma_{\gamma}\left(T_{q}, T_{d}\right)=\max _{\pi \in \Pi\left(T_{q}, T_{d}\right)} \gamma(\pi)
+$$
+
+$$
+\gamma(\pi)=\sum_{\left(\hat{T}_{q}^{i}, \hat{T}_{d}^{i}\right) \in \pi} \beta_{i} \cdot\left(\alpha \cdot \text { internals }\left(\hat{T}_{d}^{i}\right)+(1-\alpha) \cdot \operatorname{leaves}\left(\hat{T}_{d}^{i}\right)\right)
+$$
+
+$internals \left(\hat{T}_{d}^{i}\right)$ 
