@@ -4,7 +4,7 @@ author: Hank
 mathjax: true
 tags:
   - 公式检索
-  - 操作数
+  - 操作树
 date: 2021-07-17 20:50:03
 categories: 学习
 summary: 本文描述了如何使用操作树来对公式进行相似度检索。
@@ -20,7 +20,7 @@ summary: 本文描述了如何使用操作树来对公式进行相似度检索�
 2. 与之前接触过的树相似度算法有何不同？
 3. 为什么是操作树而不是别的树？
 
-## 数学公式相似度检索的关键问题是什么？
+## 关键问题
 
 + 以何种形式表达数学公式？
 
@@ -64,7 +64,7 @@ $$
 公共子树森林（ommon formula forest）是所有**不相连**的公共子树的集合，一个公共子树森林可以用公式表示为：
 
 $$
-\pi=\left\{\left(\hat{T}_{q}^{1}, \hat{T}_{d}^{1}\right),\left(\hat{T}_{q}^{2}, \hat{T}_{d}^{2}\right), \ldots\left(\hat{T}_{q}^{n}, \hat{T}_{d}^{n}\right)\right\} \in \Pi\left(T_{q}, T_{d}\right)
+\pi=\left\{\left(\hat{T}_{q}^{1}, \hat{T}_{d}^{1}\right),\left(\hat{T}_{q}^{2}, \hat{T}_{d}^{2}\right), \ldots\left(\hat{T}_{q}^{n}, \hat{T}_{d}^{n}\right)\right\} \in \Pi\left(T_{q}, T_{d}\right)\qquad(1)
 $$
 
 两个表达式之间可能存在多个不同的公共子树森林，都属于$\Pi\left(T_{q}, T_{d}\right)$。
@@ -74,11 +74,11 @@ $$
 ### 定义3 度量相似度
 
 $$
-\Gamma_{\gamma}\left(T_{q}, T_{d}\right)=\max _{\pi \in \Pi\left(T_{q}, T_{d}\right)} \gamma(\pi)
+\Gamma_{\gamma}\left(T_{q}, T_{d}\right)=\max _{\pi \in \Pi\left(T_{q}, T_{d}\right)} \gamma(\pi)\qquad(2)
 $$
 
 $$
-\gamma(\pi)=\sum_{\left(\hat{T}_{q}^{i}, \hat{T}_{d}^{i}\right) \in \pi} \beta_{i} \cdot\left(\alpha \cdot \text { internals }\left(\hat{T}_{d}^{i}\right)+(1-\alpha) \cdot \operatorname{leaves}\left(\hat{T}_{d}^{i}\right)\right)
+\gamma(\pi)=\sum_{\left(\hat{T}_{q}^{i}, \hat{T}_{d}^{i}\right) \in \pi} \beta_{i} \cdot\left(\alpha \cdot \text { internals }\left(\hat{T}_{d}^{i}\right)+(1-\alpha) \cdot \operatorname{leaves}\left(\hat{T}_{d}^{i}\right)\right)\qquad(3)
 $$
 
 $internals \left(T\right)$： T中节点或操作符的数目
@@ -88,3 +88,16 @@ $leaves(T)$：T中叶节点的数目
 $\alpha$：大于0小于1，操作符贡献的权重
 
 $\beta_i$：大于0，子表达式贡献的权重，子表达式的范围越广，贡献的权重越大。实际计算中，对于一些范围小的子树，该值取0
+
+### 子表达式匹配
+
+#### 贪心算法
+
+**假设1**
+
+如果$\pi^{*}=\left\{\left(\hat{T}_{q}^{1 *}, \hat{T}_{d}^{1 *}\right),\left(\hat{T}_{q}^{2 *}, \hat{T}_{d}^{2 *}\right) \ldots\left(\hat{T}_{q}^{n *}, \hat{T}_{d}^{n *}\right)\right\} \in \Pi\left(T_{q}, T_{d}\right)$ 能够使公式2在 $\alpha=0$ 且 $\beta_{1} \gg \beta_{2} \gg \ldots \gg \beta_{n}$取到最大值，那就认为在 $\alpha \neq 0$ 且 $\beta_{1} \geq \beta_{2} \geq \ldots \geq \beta_{n}$时， $\pi^{*}$ 也能让其取到最大值。
+
+在该假设的第一个条件下，公式3的形式是
+$$
+\gamma(\pi)=\sum_{\left(\hat{T}_{q}^{i}, \hat{T}_{d}^{i}\right) \in \pi} \beta_{i} \cdot{leaves}\left(\hat{T}_{d}^{i}\right)
+$$
