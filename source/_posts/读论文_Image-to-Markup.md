@@ -12,6 +12,8 @@ summary: 循着一篇北师大论文的参考文献找到了哈佛的这篇文�
 
 ## 背景
 
+标题：Image-to-Markup Generation with Coarse-to-Fine Attention
+
 作者：Yuntian Deng, Anssi Kanervisto, Jeffrey Ling, Alexander M. Rush
 
 来源：International Conference on Machine Learning，2017
@@ -161,7 +163,7 @@ $$
 $$
 b_{t} \leftarrow \beta b_{t}+(1-\beta) \tilde{r}_{t}
 $$
-$b_{t}$为一个可变的平均奖励基线，从而降低方差，减少噪音。
+$b_{t}$ 为一个可变的平均奖励基线，从而降低方差，减少噪音。
 
 #### 时间复杂度
 

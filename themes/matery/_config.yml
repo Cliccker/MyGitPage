@@ -19,6 +19,10 @@ menu:
   Friends:
     url: /friends
     icon: fas fa-address-book
+  Webstack:
+    name: 吾梦导航
+    url: /collection
+    icon: fas fa-archive
   # 二级菜单写法如下
   #Medias:
   #  icon: fas fa-list
