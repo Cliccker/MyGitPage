@@ -117,7 +117,7 @@ summary: 为了应对面试中可能存在的【分析以下xx这款产品】之
 
 ## 导航栏对核心流程的影响
 
-![导航栏指向的五个页面](C:/Users/76084/AppData/Roaming/Typora/typora-user-images/image-20210901191451972.png)
+![导航栏指向的五个页面](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/20210901203403.png)
 
 整体来看，每一栏的分工都是比较明确的。
 
@@ -135,7 +135,7 @@ summary: 为了应对面试中可能存在的【分析以下xx这款产品】之
 
 + 其次，我们可以看到一列的超链接，每一个链接进去都是一个新的页面，都有不少丰富的内容，尤其是`排行榜`。要不是需要做这个分析我都没注意到有这么个页面。为什么我会没注意到它呢？我想最主要的原因是它和**减压、怀旧、儿童**放在了一起😅，这个排布真的毫无逻辑。对比一下iPad版本的`浏览`，不知为何要删去这么多重要的内容...
 
-  <img src="C:/Users/76084/AppData/Roaming/Typora/typora-user-images/image-20210901201301008.png" alt="iPad版本的浏览页面" style="zoom:50%;" />
+  <img src="https://my-picbed.oss-cn-hangzhou.aliyuncs.com/20210901203408.png" alt="iPad版本的浏览页面" style="zoom:50%;" />
 
 + 最后，也是最大的疑问。**为什么不在这个页面添加搜索框而是单独增加一个搜索页面？？？**`搜索`只有两栏内容，`搜索框`和`浏览类别`，这两个页面的职责混淆的也太让人匪夷所思了
 
@@ -149,5 +149,5 @@ summary: 为了应对面试中可能存在的【分析以下xx这款产品】之
 
 这个页面没有什么问题，但是你能发现，同一首歌曲是可以收藏两次的，又是蜜汁逻辑😅
 
-<img src="C:/Users/76084/AppData/Roaming/Typora/typora-user-images/image-20210901201600399.png" alt="《小小》收藏了两次" style="zoom:25%;" />
+<img src="https://my-picbed.oss-cn-hangzhou.aliyuncs.com/20210901203417.png" alt="《小小》收藏了两次" style="zoom:25%;" />
 
