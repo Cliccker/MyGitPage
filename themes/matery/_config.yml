@@ -20,7 +20,7 @@ menu:
     url: /friends
     icon: fas fa-address-book
   吾梦导航:
-    url: /collection/
+    url: /navigation/
     icon: fas fa-glass-cheers
   # 二级菜单写法如下
   #Medias:
