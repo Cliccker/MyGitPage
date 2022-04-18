@@ -4,9 +4,10 @@ author: Hank
 tags:
   - Quicker
   - flomo
-date: 2021-05-22 23:41:46
 categories: 实践
 summary: 花了一晚上熟悉了Quicker的动作编辑，写了一个笔记工具~
+abbrlink: 73ed
+date: 2021-05-22 23:41:46
 ---
 ## 关于Quicker
 [Quicker](https://getquicker.net/)是我一直都在使用的工具软件。
