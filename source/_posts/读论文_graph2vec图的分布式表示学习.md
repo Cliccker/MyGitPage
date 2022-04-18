@@ -1,5 +1,5 @@
 ---
-title: '读论文——graph2vec:图的分布式表示学习'
+title: 读论文——graph2vec:图的分布式表示学习
 author: Hank
 mathjax: true
 categories: 学习

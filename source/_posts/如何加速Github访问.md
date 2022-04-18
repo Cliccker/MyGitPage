@@ -1,5 +1,5 @@
 ---
-title: 如何加速Github访问速度
+title: 如何加速Github访问
 author: Hank
 categories: 技巧
 tags:

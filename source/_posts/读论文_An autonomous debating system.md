@@ -1,5 +1,5 @@
 ---
-title: 读文章—— An autonomous debating system
+title: 读论文——An autonomous debating system
 tags:
   - AI
   - 辩论
