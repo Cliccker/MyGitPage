@@ -15,11 +15,7 @@
     "-": "0.0.1",
     "bulma-stylus": "^0.8.0",
     "g": "^2.0.1",
-<<<<<<< HEAD
-    "hexo": "^6.0.0",
-=======
     "hexo": "^4.2.1",
->>>>>>> parent of 14391b1 (upadte)
     "hexo-abbrlink": "^2.2.1",
     "hexo-component-inferno": "^0.4.0",
     "hexo-deployer-git": "^2.1.0",
