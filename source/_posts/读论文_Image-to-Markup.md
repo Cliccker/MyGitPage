@@ -4,11 +4,10 @@ author: Hank
 tags:
   - 公式识别
   - 注意力机制
+date: 2021-08-16 10:57:47
 mathjax: true
 categories: 学习
 summary: 循着一篇北师大论文的参考文献找到了哈佛的这篇文章，我们一起来看看吧~
-abbrlink: 6a24
-date: 2021-08-16 10:57:47
 ---
 
 ## 背景

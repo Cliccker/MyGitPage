@@ -1,16 +1,13 @@
 ---
-title: >-
-  读论文——Structural Similarity Search for Formulas Using Leaf-Root Paths in
-  Operator Subtrees
+title: 读论文——Structural Similarity Search for Formulas Using Leaf-Root Paths in Operator Subtrees
 author: Hank
 mathjax: true
 tags:
   - 公式检索
   - 操作树
+date: 2021-07-17 20:50:03
 categories: 学习
 summary: 本文描述了如何使用操作树来对公式进行相似
-abbrlink: 3a48
-date: 2021-07-17 20:50:03
 ---
 **标题：**Structural Similarity Search for Formulas Using Leaf-Root Paths in Operator Subtrees
 
