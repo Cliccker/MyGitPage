@@ -56,9 +56,11 @@ date: 2021-07-17 20:50:03
 
 公式树$Tq$和$T_d$，他们的公共子树包含两个部分，即这两个公式中结构一致的子树$\hat{T}_q$和$\hat{T}_d$，且子树的叶节点为公式树的叶节点。用公式可以表达为：
 
+{% raw %}
 $$
 CFS\left(T_{q}, T_{d}\right)=\left\{\hat{T}_{q}, \hat{T}_{d}: \hat{T}_{q} \preceq_{l} T_{q}, \hat{T}_{d} \preceq_{l} T_{d}, \hat{T}_{q} \cong \hat{T}_{d}, \hat{T}_{q} \subseteq T_{q}, \hat{T}_{d} \subseteq T_{d}\right\}
 $$
+{% endraw %}
 
 其中$“\cong”$表示同构，$“\subseteq”$表示从属关系，而$“\preceq_{l}”$表示子树的叶节点为操作树的叶节点，用图片来说明
 
@@ -68,9 +70,11 @@ $$
 
 公共子树森林（common formula forest）是所有**不相连**的公共子树的集合，一个公共子树森林可以用公式表示为：
 
+{% raw %}
 $$
 \pi=\left\{\left(\hat{T}_{q}^{1}, \hat{T}_{d}^{1}\right),\left(\hat{T}_{q}^{2}, \hat{T}_{d}^{2}\right), \ldots\left(\hat{T}_{q}^{n}, \hat{T}_{d}^{n}\right)\right\} \in \Pi\left(T_{q}, T_{d}\right)\qquad(1)
 $$
+{% endraw %}
 
 两个表达式之间可能存在多个不同的公共子树森林，都属于$\Pi\left(T_{q}, T_{d}\right)$。
 
@@ -78,13 +82,17 @@ $$
 
 ### 定义3 度量相似度
 
+{% raw %}
 $$
 \Gamma_{\gamma}\left(T_{q}, T_{d}\right)=\max _{\pi \in \Pi\left(T_{q}, T_{d}\right)} \gamma(\pi)\qquad(2)
 $$
+{% endraw %}
 
+{% raw %}
 $$
 \gamma(\pi)=\sum_{\left(\hat{T}_{q}^{i}, \hat{T}_{d}^{i}\right) \in \pi} \beta_{i} \cdot\left(\alpha \cdot \text { internals }\left(\hat{T}_{d}^{i}\right)+(1-\alpha) \cdot \operatorname{leaves}\left(\hat{T}_{d}^{i}\right)\right)\qquad(3)
 $$
+{% endraw %}
 
 + $internals \left(T\right)$： T中节点或操作符的数目
 
@@ -106,12 +114,16 @@ $$
 
 #### 贪心算法
 
-**假设1**：如果$\pi^{*}=\left\{\left(\hat{T}_{q}^{1 *}, \hat{T}_{d}^{1 *}\right),\left(\hat{T}_{q}^{2 *}, \hat{T}_{d}^{2 *}\right) \ldots\left(\hat{T}_{q}^{n *}, \hat{T}_{d}^{n *}\right)\right\} \in \Pi\left(T_{q}, T_{d}\right)$ 能够使公式2在 $\alpha=0$ 且 $\beta_{1} \gg \beta_{2} \gg \ldots \gg \beta_{n}$取到最大值，那就认为在 $\alpha \neq 0$ 且 $\beta_{1} \geq \beta_{2} \geq \ldots \geq \beta_{n}$时， $\pi^{*}$ 也能让其取到最大值。
+**假设1**：如果{% raw %}$\pi^{*}=\left\{\left(\hat{T}_{q}^{1 *}, \hat{T}_{d}^{1 *}\right),\left(\hat{T}_{q}^{2 *}, \hat{T}_{d}^{2 *}\right) \ldots\left(\hat{T}_{q}^{n *}, \hat{T}_{d}^{n *}\right)\right\} \in \Pi\left(T_{q}, T_{d}\right)${% endraw %} 能够使公式2在 {% raw %}$\alpha=0$ 且 $\beta_{1} \gg \beta_{2} \gg \ldots \gg \beta_{n}${% endraw %}取到最大值，那就认为在 {% raw %}$\alpha \neq 0$ 且 $\beta_{1} \geq \beta_{2} \geq \ldots \geq \beta_{n}${% endraw %}时， $\pi^{*}$ 也能让其取到最大值。
 
 在该假设的第一个条件下，公式3的形式是
+
+{% raw %}
 $$
 \gamma(\pi)=\sum_{\left(\hat{T}_{q}^{i}, \hat{T}_{d}^{i}\right) \in \pi} \beta_{i} \cdot{leaves}\left(\hat{T}_{d}^{i}\right)
 $$
+{% endraw %}
+
 > 在该假设下，范围越广、运算对象越多的公共子树得分越高，从而使得其属于的公共子树森林得分越高。
 
 同时文章也想要一种更有效地找到相似结构的方式。

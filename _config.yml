@@ -126,15 +126,6 @@ wordCount:
   min2read: true
   totalCount: true
 
-lazyload:
-  enable: false
-  onlypost: true  # 是否只对文章的图片做懒加载
-  loadingImg: /medias/loading.gif
-
-
-permalink_pinyin:
-  enable: false
-  separator: '_' # default: '-'
 
 # abbrlink config
 abbrlink:
