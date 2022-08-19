@@ -193,7 +193,7 @@ postInfo:
   wordCount: true # 文章字数统计
   totalCount: true # 站点总文章字数
   min2read: false # 文章阅读时长
-  readCount: true # 文章阅读次数
+  readCount: false # 文章阅读次数
 
 # Whether to activate the 'love' effect of clicking on the page.
 # 是否激活点击页面的'爱心'效果，默认激活.
@@ -204,8 +204,8 @@ clicklove:
 # 在”关于”页面中配置个人信息，包括头像、职业和个人介绍.
 profile:
   avatar: /medias/avatar.jpg
-  career: 职业规划是AI产品
-  introduction: 🤯喜欢头脑风暴🤪不是很聪明🤣却很真诚
+  career: 现在是一个B端产品小学生
+  introduction: ENFP｜真诚｜共情
 
 # config my projects informations in about page.
 # If you don't want to display this `My Projects` content, you can deactivate or delete this configuration.
