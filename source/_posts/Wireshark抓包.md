@@ -33,7 +33,7 @@ summary: 这篇文章总结了如何使用Wireshark进行抓包，以及如何�
 
 #### Frame信息分析
 
-![image-20220816170335345](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208161703466.png)
+![Frame](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208161703466.png)
 
 ```python
 Frame 2: 670 bytes on wire (5360 bits), 670 bytes captured (5360 bits) on interface en5, id 0
@@ -57,7 +57,7 @@ Frame 2: 670 bytes on wire (5360 bits), 670 bytes captured (5360 bits) on interf
 
 #### Ethernet信息分析
 
-![image-20220816174510915](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208161745054.png)
+![Ethernet](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208161745054.png)
 
 ```python
 Ethernet II, Src: AsixElec_28:d4:3c (00:0e:c6:28:d4:3c), Dst: RuijieNe_58:d9:be (00:74:9c:58:d9:be)
@@ -74,7 +74,7 @@ Ethernet II, Src: AsixElec_28:d4:3c (00:0e:c6:28:d4:3c), Dst: RuijieNe_58:d9:be 
 
 #### IPv4协议信息解析
 
-![image-20220816175939321](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208161759423.png)
+![IPv4](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208161759423.png)
 
 ```python
 Internet Protocol Version 4, Src: 192.168.119.104, Dst: 123.57.3.111
@@ -98,7 +98,7 @@ Internet Protocol Version 4, Src: 192.168.119.104, Dst: 123.57.3.111
 
 #### 传输层协议解析
 
-![image-20220816180512202](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208161806746.png)
+![TCP](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208161806746.png)
 
 ```python
 Transmission Control Protocol, Src Port: 58569, Dst Port: 443, Seq: 1445, Ack: 1, Len: 604
@@ -131,8 +131,6 @@ Transmission Control Protocol, Src Port: 58569, Dst Port: 443, Seq: 1445, Ack: 1
 
 ### UDP报文
 
-![[TCP IP参考模型#^bh6mtq]]
-
 仔细看UDP的报文，其实大部分的内容和TCP报文差异不大
 
 #### 封包信息分析
@@ -146,15 +144,15 @@ Data (656 bytes)
 ```
 ### ARP报文
 
-![image-20220817163811980](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208171638697.png)
+![ARP](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208171638697.png)
 
 ![[ARP 协议原理 _ 小菜学网络#^z1h2km]]
 
-![image-20220817164908822](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208171649879.png)
+![ARP报文格式](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208171649879.png)
 
 上图展示了ARP的工作流程。总的来说，一个ARP报文包含了以下几个字段：
 
-![](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208171643497.png)
+![ARP帧结构](https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202208171643497.png)
 
 结合Wireshark可以看到上述报文的具体参数：
 ```python
