@@ -133,3 +133,7 @@ abbrlink:
   rep: hex    #support dec(default) and hex
 
 # 更改 permalink 值
+
+search:
+path: search.xml
+field: post
