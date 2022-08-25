@@ -4,9 +4,10 @@ author: Hank
 tags:
   - Wireshark
   - 抓包工具
-date: 2022-08-16 16:39
+date: '2022-08-16 16:39'
 categories: 学习
 summary: 这篇文章总结了如何使用Wireshark进行抓包，以及如何理解各类数据包内容。
+abbrlink: fc45
 ---
 
 ### TCP报文

@@ -394,34 +394,49 @@ libs:
   css:
     matery: /css/matery.css
     mycss: /css/my.css
-    fontAwesome: /libs/awesome/css/all.css # V5.11.1
-    materialize: /libs/materialize/materialize.min.css # 1.0.0
+    post: /css/post.css
+    reward: /css/reward.css
+    dark: /css/dark.css
+    indexcover: /css/indexcover.css
+    gallery: /css/gallery.css
+    fontAwesome: /libs/awesome/css/all.min.css # V6.1.2 20220809
+    materialize: /libs/materialize/materialize.min.css # 1.0.0 20211109
     aos: /libs/aos/aos.css
     animate: /libs/animate/animate.min.css # V3.5.1
-    lightgallery: /libs/lightGallery/css/lightgallery.min.css # V1.6.11
+    lightgallery: /libs/lightGallery/css/lightgallery.min.css # V1.10.0
     aplayer: /libs/aplayer/APlayer.min.css
     dplayer: /libs/dplayer/DPlayer.min.css
     gitalk: /libs/gitalk/gitalk.css
     jqcloud: /libs/jqcloud/jqcloud.css
     tocbot: /libs/tocbot/tocbot.css
-    prism: /libs/prism/prism.css
+    prism: /libs/prism/prism.min.css
+    mermaid: /libs/mermaid/mermaid.min.css
+    fancybox: /libs/fancybox/jquery.fancybox.css
+    justifiedGallery: /libs/justifiedGallery/justifiedGallery.min.css
   js:
     matery: /js/matery.js
-    jquery: /libs/jquery/jquery.min.js
+    jquery: /libs/jquery/jquery-3.6.0.min.js  #3.6.0 20211109
     materialize: /libs/materialize/materialize.min.js # 1.0.0
     masonry: /libs/masonry/masonry.pkgd.min.js # v4.0.0
     aos: /libs/aos/aos.js
     scrollProgress: /libs/scrollprogress/scrollProgress.min.js
-    lightgallery: /libs/lightGallery/js/lightgallery-all.min.js # V1.6.11
+    lightgallery: /libs/lightGallery/js/lightgallery-all.min.js # V1.10.0
+    typed: /libs/typed/typed.js
     clicklove: /libs/others/clicklove.js
+    sakura: /libs/others/sakura.js
+    star: /libs/others/star.js
+    snow: /libs/others/snow.js
+    tcaptcha: /libs/others/TencentCaptcha.js
     busuanzi: /libs/others/busuanzi.pure.mini.js
     aplayer: /libs/aplayer/APlayer.min.js
+    meting: /libs/aplayer/Meting.min.js
     dplayer: /libs/dplayer/DPlayer.min.js
     crypto: /libs/cryptojs/crypto-js.min.js
     echarts: /libs/echarts/echarts.min.js
     gitalk: /libs/gitalk/gitalk.min.js
     valine: /libs/valine/Valine.min.js # 若想保持最新版，请替换为 https://unpkg.com/valine/dist/Valine.min.js  默认为 /libs/valine/Valine.min.js
     minivaline: /libs/minivaline/MiniValine.js # latest
+    waline: /libs/waline/Waline.min.js # 若想保持最新版，请替换为 https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js 默认为(1.5.2版本) /libs/valine/Valine.min.js
     twikoo: /libs/twikoo/twikoo.all.min.js # 若想保持最新版，请替换为 https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js  默认为 /libs/twikoo/twikoo.all.min.js
     jqcloud: /libs/jqcloud/jqcloud-1.0.4.min.js
     tocbot: /libs/tocbot/tocbot.min.js
@@ -430,6 +445,14 @@ libs:
     ribbonRefresh: /libs/background/ribbon-refresh.min.js
     ribbon_dynamic: /libs/background/ribbon-dynamic.js
     instantpage: /libs/instantpage/instantpage.js
+    mermaid: /libs/mermaid/mermaid.min.js
+    fancybox: /libs/fancybox/fancybox.js
+    justifiedGallery: /libs/justifiedGallery/justifiedGallery.min.js
+    prism: /libs/prism/prism.min.js
+    codeblock: /libs/codeBlock/codeBlockFuction.js
+    codelang: /libs/codeBlock/codeLang.js
+    codecopy: /libs/codeBlock/codeCopy.js
+    codeshrink: /libs/codeBlock/codeShrink.js
 
 # The post featured images that needs to be displayed when there is no image.
 # 无文章特色图片时需要显示的文章特色图片.
