@@ -1,5 +1,5 @@
 ---
-title: windoWindows终端上的敏感文件们
+title: Windows终端上的敏感文件们
 author: Hank
 tags:
   - Windows
