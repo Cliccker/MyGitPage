@@ -200,7 +200,7 @@ def main():
 
 ### MSC
 
-添加到Microsoft管理控制台(MMC)的文件，该程序用于配置和监视Windows计算机系统；简单来说，可以通过编辑和修改msc文件来实现对系统功能的修改，当然攻击者也有可能利用他来篡改系统设置。这位的就在[求助贴](https://answers.microsoft.com/en-us/windows/forum/all/a-virus-has-changed-my-servicesmsc-and-it-wont-let/0549add5-c254-40d3-b623-ebcfdd9e1741)中说自己的msc服务被篡改了，很多服务和程序启动不了。
+添加到Microsoft管理控制台(MMC)的文件，该程序用于配置和监视Windows计算机系统；简单来说，可以通过编辑和修改msc文件来实现对系统功能的修改，当然攻击者也有可能利用他来篡改系统设置。这位就在[求助贴](https://answers.microsoft.com/en-us/windows/forum/all/a-virus-has-changed-my-servicesmsc-and-it-wont-let/0549add5-c254-40d3-b623-ebcfdd9e1741)中说自己的msc服务被篡改了，很多服务和程序启动不了。
 
 ## 总结
 
