@@ -76,7 +76,7 @@ dream:
   enable: true
   showTitle: true
   title: 你觉得人生的终极目标是什么呢？
-  text: 追求内心的平和。
+  text: Inner Peace
 
 # Whether to display the musics.
 # 是否在首页显示音乐.
@@ -267,13 +267,13 @@ myProjects:
 mySkills:
   enable: true
   data:
-    机械:
+    写东西:
       background: 'linear-gradient(to right, #FF0066 0%, #FF00CC 100%)'
       percent: 40%
-    计算机:
+    厨艺:
       background: 'linear-gradient(to right, #9900FF 0%, #CC66FF 100%)'
       percent: 60%
-    食物:
+    吃:
       background: 'linear-gradient(to right, #2196F3 0%, #42A5F5 100%)'
       percent: 100%
 
@@ -281,7 +281,7 @@ mySkills:
 # If you don't want to display this `Gallery` content, you can deactivate or delete this configuration.
 # 在“关于”页面配置"我的相册"图片，如果你不需要这些信息则可以将其设置为不激活或者将其删除.
 myGallery:
-  enable: true
+  enable: false
   data:
     - /medias/featureimages/0.jpg
     - /medias/featureimages/1.jpg
