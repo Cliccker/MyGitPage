@@ -1,75 +1,82 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
-<head>
-  <meta charset="UTF-8">
-  <title>王国之泪发售倒计时</title>
-  <style>
-    /* 设置背景图片 */
-    body {
-      background-image: url('https://images.alphacoders.com/127/1272163.jpg');
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-
-    /* 隐藏网页标题 */
-    h1 {
-      display: none;
-    }
-
-    /* 设置倒计时的样式 */
-    #countdown {
-      color: rgb(251, 247, 220);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-size: 40px;
-      text-align: right;
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      padding: 10px 20px;
-      background-color: rgb(74, 213, 156);
-      border: 5px solid rgb(74, 213, 156);
-      border-radius: 5px 0 0 0;
-      margin-bottom: 20px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- 添加倒计时 -->
-  <div id="countdown"></div>
-
-  <!-- 添加倒计时脚本 -->
-  <script>
-    // 设置倒计时结束的日期和时间
-    var countDownDate = new Date("2023-05-11T23:00:00").getTime();
-
-    // 每秒钟更新倒计时
-    var x = setInterval(function () {
-      // 获取现在的时间
-      var now = new Date().getTime();
-
-      // 计算距离倒计时结束的时间
-      var distance = countDownDate - now;
-
-      // 计算剩余的天数、小时数、分钟数和秒数
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      // 将倒计时显示在id为"countdown"的元素中
-      document.getElementById("countdown").innerHTML = "距离王泪解禁还有：" + days + "天 " + hours + "小时 " + minutes + "分钟 " + seconds + "秒";
-
-      // 如果倒计时结束，清除定时器
-      if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("countdown").innerHTML = "玩得开心！";
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>王国之泪发售倒计时</title>
+    <style>
+      /* 设置背景图片 */
+      body {
+        background-image: url("https://images.alphacoders.com/127/1272163.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 0;
       }
-    }, 1000);
 
-  </script>
-</body>
+      /* 隐藏网页标题 */
+      h1 {
+        display: none;
+      }
 
+      /* 设置倒计时的样式 */
+      #countdown {
+        color: rgb(251, 247, 220);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 6vw;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 2vh 0;
+        background-color: rgb(74, 213, 156);
+        border: 5px solid rgb(74, 213, 156);
+        box-sizing: border-box;
+        border-radius: 5px 5px 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 添加倒计时 -->
+    <div id="countdown"></div>
+
+    <!-- 添加倒计时脚本 -->
+    <script>
+      // 设置倒计时结束的日期和时间
+      var countDownDate = new Date("2023-05-11T23:00:00").getTime();
+
+      // 每秒钟更新倒计时
+      var x = setInterval(function () {
+        // 获取现在的时间
+        var now = new Date().getTime();
+
+        // 计算距离倒计时结束的时间
+        var distance = countDownDate - now;
+
+        // 计算剩余的天数、小时数、分钟数和秒数
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // 将倒计时显示在id为"countdown"的元素中
+        document.getElementById("countdown").innerHTML =
+          "距离王泪解禁还有：" +
+          days +
+          "天 " +
+          hours +
+          "小时 " +
+          minutes +
+          "分钟 " +
+          seconds +
+          "秒";
+
+        // 如果倒计时结束，清除定时器
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("countdown").innerHTML = "玩得开心！";
+        }
+      }, 1000);
+    </script>
+  </body>
 </html>
