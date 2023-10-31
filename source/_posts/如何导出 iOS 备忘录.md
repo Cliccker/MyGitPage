@@ -27,7 +27,7 @@ date: 2023-10-31 12:53:00
 
 + 代码
 
-{% codeblock lang:python %}
+```python
 import subprocess
 import os
 import re
@@ -43,7 +43,7 @@ def get_notes():
     tell application "Notes"
         set noteNames to the name of every note of folder "Notes"
         set noteContents to the body of every note of folder "Notes"
-        return {noteNames, noteContents}
+        return \{noteNames, noteContents\}
     end tell
     '''
     process = subprocess.Popen(['osascript', '-e', script], stdout=subprocess.PIPE)
@@ -60,12 +60,12 @@ def save_as_markdown(note_names, note_contents):
         os.mkdir("NotesMarkdown")
 
     for name, content in zip(note_names, note_contents):
-        with open(f"NotesMarkdown/{name}.md", "w") as f:
+        with open(f"NotesMarkdown/\{name\}.md", "w") as f:
             f.write(content)
 
 
 note_names, note_contents = get_notes()
 save_as_markdown(note_names, note_contents)
-{% endcodeblock %}
+```
 
 ⚠️：运行过程中脚本会要求权限，允许就好了
