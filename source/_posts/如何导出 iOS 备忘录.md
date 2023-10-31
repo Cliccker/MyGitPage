@@ -27,7 +27,7 @@ date: 2023-10-31 12:53:00
 
 + 代码
 
-```python
+{% codeblock lang:python %}
 import subprocess
 import os
 import re
@@ -66,6 +66,6 @@ def save_as_markdown(note_names, note_contents):
 
 note_names, note_contents = get_notes()
 save_as_markdown(note_names, note_contents)
-```
+{% endcodeblock %}
 
 ⚠️：运行过程中脚本会要求权限，允许就好了
