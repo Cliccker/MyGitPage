@@ -69,4 +69,6 @@ note_names, note_contents = get_notes()
 save_as_markdown(note_names, note_contents)
 ```
 
-⚠️：运行过程中脚本会要求权限，允许就好了
+⚠️注意：
+
+1. 运行过程中脚本会要求权限，允许就好了
