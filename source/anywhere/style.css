@@ -61,14 +61,33 @@ button:hover {
 }
 
 p.meaning {
+    margin-top: 25px;
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #444;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 25px;
+    text-align: left; /* 释义内容左对齐 */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* 按钮之间的间距 */
+    margin-top: 30px;
+}
+
+.button-container button {
+    min-width: 120px; /* 确保按钮有最小宽度 */
+    padding: 12px 20px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
     margin-top: 20px;
-    font-size: 1.1em;
-    line-height: 1.6;
-    color: #555;
-    border-top: 1px dashed #e0e0e0;
-    padding-top: 20px;
 }
 
 .navigation button {
-    width: 120px;
+    width: 150px; /* 导航按钮宽度 */
 }
