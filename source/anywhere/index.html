@@ -1,28 +1,490 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>瞎掰王</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>手冲咖啡计时器（静态版）</title>
+  <style>
+    /* 基础样式，避免依赖构建工具或框架 */
+    :root {
+      --bg-from: #78350f; /* amber-900 */
+      --bg-via: #9a3412;  /* orange-800 */
+      --bg-to:   #78350f; /* amber-900 */
+      --white: #ffffff;
+      --white-10: rgba(255,255,255,0.10);
+      --white-15: rgba(255,255,255,0.15);
+      --white-20: rgba(255,255,255,0.20);
+      --white-60: rgba(255,255,255,0.60);
+      --white-70: rgba(255,255,255,0.70);
+      --blue-500: #3b82f6;
+      --blue-600: #2563eb;
+      --green-500: #22c55e;
+      --amber-300: #fcd34d;
+      --orange-500: #f97316;
+      --amber-600: #d97706;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, var(--bg-from), var(--bg-via), var(--bg-to));
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 背景装饰球 */
+    .bg-deco { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .ball {
+      position: absolute; width: 24rem; height: 24rem; border-radius: 9999px; filter: blur(40px);
+      opacity: .35;
+    }
+    .ball.orange { background: rgba(251,146,60,0.10); top: -10rem; right: -10rem; animation: pulseA 8s ease-in-out infinite; }
+    .ball.amber  { background: rgba(245,158,11,0.10); bottom: -10rem; left: -10rem; animation: pulseB 8s ease-in-out infinite; }
+    @keyframes pulseA { 0%{transform:scale(1)} 50%{transform:scale(1.2); opacity:.5} 100%{transform:scale(1)} }
+    @keyframes pulseB { 0%{transform:scale(1.2)} 50%{transform:scale(1); opacity:.3} 100%{transform:scale(1.2)} }
+
+    .container { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+
+    .header { text-align: center; margin-bottom: 24px; }
+    .header .title { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .header h1 { margin: 0; font-size: 28px; font-weight: 700; }
+    .muted { color: var(--white); }
+
+    /* 顶部标签 */
+    .tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 16px; }
+    .tab-btn { padding: 10px 14px; border-radius: 9999px; border: 1px solid var(--white-20); background: rgba(255,255,255,0.10); color: var(--white); cursor: pointer; }
+    .tab-btn.active { background: linear-gradient(135deg, var(--blue-500), var(--blue-600)); border-color: transparent; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .card {
+      margin-bottom: 24px;
+      border-radius: 24px;
+      background: var(--white-10);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border: 2px solid var(--white-20);
+      padding: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,.35);
+    }
+
+    .section-title { text-align: center; margin-bottom: 16px; }
+    .section-title .label { font-size: 12px; color: var(--white); margin-bottom: 6px; }
+    .section-title .name { font-size: 22px; margin: 0 0 4px; }
+
+    .cta {
+      display: flex; flex-direction: column; align-items: center; gap: 24px;
+    }
+
+    .big-btn-wrap { position: relative; width: 12rem; height: 12rem; }
+    .big-btn {
+      position: relative; width: 100%; height: 100%; border-radius: 9999px; cursor: pointer;
+      border: 4px solid var(--white-15);
+      box-shadow: 0 20px 40px -8px rgba(0,0,0,.5);
+      transition: transform .15s ease, filter .3s ease, background .3s ease;
+      overflow: hidden;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .big-btn:active { transform: scale(.97); }
+    .big-btn.start { background: linear-gradient(135deg, var(--orange-500), var(--amber-600)); }
+    .big-btn.running { background: linear-gradient(135deg, var(--blue-500), var(--blue-600)); }
+    .big-btn.completed { background: var(--green-500); cursor: not-allowed; }
+
+    .ring-svg { position: absolute; inset: -4px; width: calc(100% + 8px); height: calc(100% + 8px); transform: rotate(-90deg); pointer-events: none; }
+
+    .time-display { text-align: center; color: var(--white); }
+    .time-display .total { font-size: 40px; font-weight: 700; margin-bottom: 6px; color: var(--white); }
+
+    .stats { display: flex; gap: 24px; text-align: center; }
+    .divider { width: 1px; background: var(--white-20); }
+    .stat .label { font-size: 12px; color: var(--white); margin-bottom: 4px; }
+    .stat .value { font-size: 18px; font-weight: 600; color: var(--white); }
+
+    .reset-btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 9999px;
+      background: var(--white-10); border: 1px solid var(--white-20); color: var(--white);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      cursor: pointer; transition: transform .15s ease, background .2s ease;
+    }
+    .reset-btn:active { transform: scale(.97); }
+    .reset-btn:hover { background: rgba(255,255,255,0.18); }
+
+    /* 配置菜单样式 */
+    .config-card {
+      margin-top: 16px;
+      border-radius: 16px;
+      background: var(--white-10);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border: 2px solid var(--white-20);
+      padding: 16px;
+    }
+    .config-title { margin: 0 0 12px; font-size: 18px; color: var(--white); }
+    .config-table { width: 100%; border-collapse: collapse; }
+    .config-table th, .config-table td { padding: 8px; text-align: left; }
+    .config-table th { color: var(--white); font-weight: 600; font-size: 12px; }
+    .config-table tr + tr td { border-top: 1px solid rgba(255,255,255,0.12); }
+    .config-input { width: 100%; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--white-20); background: rgba(0,0,0,0.15); color: var(--white); }
+    .config-row-actions { display: inline-flex; gap: 8px; }
+    .small-btn { padding: 6px 10px; border: 1px solid var(--white-20); border-radius: 10px; background: rgba(255,255,255,0.10); color: var(--white); cursor: pointer; }
+    .small-btn:active { transform: scale(.98); }
+    .config-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+
+    .big-btn { color: var(--white); }
+    .icon { display: inline-block; vertical-align: middle; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>👑瞎掰王👑</h1>
-        <div class="card">
-            <h2 id="term"></h2>
-            <p class="category" id="category"></p>
-            <div class="button-container">
-            <button id="toggleMeaning">显示释义</button>
-            <button id="knownBtn">知道了</button>
-        </div>
-            <p class="meaning" id="meaning" style="display: none;"></p>
-        </div>
-        <div class="navigation">
-            <button id="prevBtn">上一条</button>
-            <button id="nextBtn">下一条</button>
-        </div>
+  <div class="page">
+    <div class="bg-deco">
+      <div class="ball orange"></div>
+      <div class="ball amber"></div>
     </div>
-    <script src="script.js"></script>
+
+    <div class="container">
+      <div class="header">
+        <div class="title">
+          <!-- 简单咖啡杯SVG图标 -->
+          <svg class="icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--amber-300)">
+            <path d="M3 8h13v5a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8z"></path>
+            <path d="M16 8h1a4 4 0 0 1 0 8h-1"></path>
+          </svg>
+          <h1>手冲咖啡计时器</h1>
+        </div>
+        <div class="muted">精准控制每一步冲泡过程</div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="timer">计时器</button>
+        <button class="tab-btn" data-tab="config">配置</button>
+      </div>
+
+      <section id="tab-timer" class="tab-panel active">
+      <div class="card">
+        <div class="section-title">
+          <div class="label">当前步骤</div>
+          <h2 class="name" id="currentStepName">—</h2>
+          <div class="muted" id="currentStepWater">—</div>
+        </div>
+
+        <div class="cta">
+          <div class="big-btn-wrap">
+            <button id="mainBtn" class="big-btn start" aria-label="开始/暂停">
+              <svg class="ring-svg" viewBox="0 0 200 200">
+                <circle id="ring" cx="100" cy="100" r="96" stroke="white" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="603.187" stroke-dashoffset="603.187"></circle>
+              </svg>
+              <div class="time-display">
+                <div id="totalTime" class="total">00:00</div>
+                <div id="playPauseIcon">
+                  <!-- 播放图标 -->
+                  <svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </div>
+              </div>
+            </button>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="label">总时长</div>
+              <div class="value" id="totalDuration">—</div>
+            </div>
+            <div class="divider"></div>
+            <div class="stat">
+              <div class="label">总水量</div>
+              <div class="value" id="totalWater">—</div>
+            </div>
+          </div>
+
+          <button id="resetBtn" class="reset-btn" aria-label="重置">
+            <!-- 重置图标 -->
+            <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            重置
+          </button>
+        </div>
+      </div>
+      </section>
+
+      <section id="tab-config" class="tab-panel">
+      <div class="config-card">
+        <h3 class="config-title">配置步骤（标题 / 秒 / 克）</h3>
+        <div style="overflow-x:auto">
+          <table class="config-table">
+            <thead>
+              <tr>
+                <th style="width: 44px;">#</th>
+                <th>标题</th>
+                <th style="width: 120px;">时间(s)</th>
+                <th style="width: 120px;">水量(g)</th>
+                <th style="width: 120px;">操作</th>
+              </tr>
+            </thead>
+            <tbody id="configTbody"></tbody>
+          </table>
+        </div>
+        <div class="config-actions">
+          <button id="addRowBtn" class="small-btn">新增步骤</button>
+          <button id="applyBtn" class="small-btn">应用到计时器</button>
+        </div>
+      </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const STORAGE_STEPS = 'pourover-steps-v1';
+
+      let coffeeSteps = [
+        { id: 1, title: "预湿滤纸", duration: 15,  waterAmount: 30 },
+        { id: 2, title: "闷蒸",     duration: 30, waterAmount: 50 },
+        { id: 3, title: "第一次注水", duration: 20, waterAmount: 80 },
+        { id: 4, title: "第二次注水", duration: 20, waterAmount: 80 },
+        { id: 5, title: "第三次注水", duration: 20, waterAmount: 60 },
+        { id: 6, title: "滴滤完成",   duration: 30, waterAmount: 0  },
+      ];
+
+      // 状态
+      let isRunning = false;
+      let currentStepIndex = 0;
+      let stepTime = 0;     // 当前步骤计时（秒）
+      let totalTime = 0;    // 总计时（秒）
+      let intervalId = null;
+
+      // DOM 引用
+      const elCurrentStepName = document.getElementById('currentStepName');
+      const elCurrentStepWater = document.getElementById('currentStepWater');
+      const elTotalTime = document.getElementById('totalTime');
+      const elPlayPauseIcon = document.getElementById('playPauseIcon');
+      const elRing = document.getElementById('ring');
+      const elMainBtn = document.getElementById('mainBtn');
+      const elResetBtn = document.getElementById('resetBtn');
+      const elConfigTbody = document.getElementById('configTbody');
+      const elAddRowBtn = document.getElementById('addRowBtn');
+      const elApplyBtn = document.getElementById('applyBtn');
+      const tabButtons = Array.from(document.querySelectorAll('.tab-btn'));
+      const tabTimer = document.getElementById('tab-timer');
+      const tabConfig = document.getElementById('tab-config');
+      const elTotalDuration = document.getElementById('totalDuration');
+      const elTotalWater = document.getElementById('totalWater');
+
+      function recalcTotals() {
+        const totalDurationVal = coffeeSteps.reduce((acc, s) => acc + (Number(s.duration) || 0), 0);
+        const totalWaterVal = coffeeSteps.reduce((acc, s) => acc + (Number(s.waterAmount) || 0), 0);
+        elTotalDuration.textContent = totalDurationVal + 's';
+        elTotalWater.textContent = totalWaterVal + 'g';
+      }
+      function normalizeSteps(raw) {
+        if (!Array.isArray(raw)) return null;
+        const out = [];
+        for (let i = 0; i < raw.length; i++) {
+          const s = raw[i] || {};
+          const title = typeof s.title === 'string' && s.title.trim().length > 0 ? s.title.trim() : null;
+          const duration = Math.max(0, Math.floor(Number(s.duration) || 0));
+          const waterAmount = Math.max(0, Math.floor(Number(s.waterAmount) || 0));
+          if (!title) return null;
+          out.push({ id: i + 1, title, duration, waterAmount });
+        }
+        return out.length > 0 ? out : null;
+      }
+      (function loadStoredSteps(){
+        try {
+          const txt = localStorage.getItem(STORAGE_STEPS);
+          if (txt) {
+            const parsed = JSON.parse(txt);
+            const normalized = normalizeSteps(parsed);
+            if (normalized) {
+              coffeeSteps = JSON.parse(JSON.stringify(normalized));
+            }
+          }
+        } catch (e) {}
+      })();
+      recalcTotals();
+
+      const circleLen = 2 * Math.PI * 96; // 与 SVG r=96 对应
+      elRing.setAttribute('stroke-dasharray', String(circleLen));
+      elRing.setAttribute('stroke-dashoffset', String(circleLen));
+
+      function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        const m = String(mins).padStart(2,'0');
+        const s = String(secs).padStart(2,'0');
+        return m + ':' + s;
+      }
+
+      function renderHeader() {
+        const step = coffeeSteps[currentStepIndex];
+        elCurrentStepName.textContent = step.title;
+        elCurrentStepWater.textContent = step.waterAmount > 0 ? (step.waterAmount + 'g 水') : '';
+        elTotalTime.textContent = formatTime(totalTime);
+
+        const completed = (currentStepIndex === coffeeSteps.length - 1) && (stepTime >= step.duration);
+        elMainBtn.classList.toggle('completed', completed);
+        elMainBtn.classList.toggle('running', isRunning && !completed);
+        elMainBtn.classList.toggle('start', !isRunning && !completed);
+        elMainBtn.disabled = completed;
+
+        // 图标
+        elPlayPauseIcon.innerHTML = completed
+          ? '<svg class="icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h13v5a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8z"></path><path d="M16 8h1a4 4 0 0 1 0 8h-1"></path></svg><div style="font-size:12px">完成!</div>'
+          : (isRunning
+              ? '<svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>'
+              : '<svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>'
+            );
+
+        // 环形进度（当前步骤）
+        const ratio = Math.max(0, Math.min(1, stepTime / step.duration || 0));
+        elRing.setAttribute('stroke-dashoffset', String(circleLen * (1 - ratio)));
+      }
+
+      // 配置菜单渲染
+      let editableSteps = JSON.parse(JSON.stringify(coffeeSteps));
+      function buildConfigUI() {
+        elConfigTbody.innerHTML = '';
+        editableSteps.forEach((s, idx) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${idx + 1}</td>
+            <td><input class="config-input" type="text" value="${s.title}" data-key="title" data-idx="${idx}" /></td>
+            <td><input class="config-input" type="number" min="0" step="1" value="${s.duration}" data-key="duration" data-idx="${idx}" /></td>
+            <td><input class="config-input" type="number" min="0" step="1" value="${s.waterAmount}" data-key="waterAmount" data-idx="${idx}" /></td>
+            <td>
+              <span class="config-row-actions">
+                <button class="small-btn" data-action="remove" data-idx="${idx}">删除</button>
+              </span>
+            </td>
+          `;
+          elConfigTbody.appendChild(tr);
+        });
+      }
+
+      function tick() {
+        const step = coffeeSteps[currentStepIndex];
+        stepTime = Math.min(step.duration, stepTime + 0.1);
+        totalTime = totalTime + 0.1;
+        if (stepTime >= step.duration) {
+          if (currentStepIndex < coffeeSteps.length - 1) {
+            currentStepIndex += 1;
+            stepTime = 0;
+          } else {
+            pause(); // 到最后一步完成
+          }
+        }
+        renderHeader();
+      }
+
+      function start() {
+        if (isRunning) return;
+        isRunning = true;
+        intervalId = setInterval(tick, 100);
+        renderHeader();
+      }
+
+      function pause() {
+        isRunning = false;
+        if (intervalId) { clearInterval(intervalId); intervalId = null; }
+        renderHeader();
+      }
+
+      function toggleStartPause() { isRunning ? pause() : start(); }
+
+      function resetAll() {
+        pause();
+        currentStepIndex = 0;
+        stepTime = 0;
+        totalTime = 0;
+        renderHeader();
+      }
+
+      elMainBtn.addEventListener('click', toggleStartPause);
+      elResetBtn.addEventListener('click', resetAll);
+
+      // 标签切换（记忆上次选择）
+      function activateTab(name) {
+        tabButtons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-tab') === name));
+        tabTimer.classList.toggle('active', name === 'timer');
+        tabConfig.classList.toggle('active', name === 'config');
+        try { localStorage.setItem('pourover-tab', name); } catch (e) {}
+      }
+      tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => activateTab(btn.getAttribute('data-tab')));
+      });
+      try {
+        const last = localStorage.getItem('pourover-tab');
+        if (last === 'config') activateTab('config'); else activateTab('timer');
+      } catch (e) { activateTab('timer'); }
+
+      // 配置输入事件委托
+      elConfigTbody.addEventListener('input', function(e) {
+        const t = e.target;
+        if (!(t instanceof HTMLInputElement)) return;
+        const idx = Number(t.getAttribute('data-idx'));
+        const key = t.getAttribute('data-key');
+        if (key === 'title') {
+          editableSteps[idx].title = t.value;
+        } else if (key === 'duration') {
+          editableSteps[idx].duration = Math.max(0, Math.floor(Number(t.value) || 0));
+          t.value = String(editableSteps[idx].duration);
+        } else if (key === 'waterAmount') {
+          editableSteps[idx].waterAmount = Math.max(0, Math.floor(Number(t.value) || 0));
+          t.value = String(editableSteps[idx].waterAmount);
+        }
+      });
+
+      elConfigTbody.addEventListener('click', function(e) {
+        const t = e.target;
+        if (!(t instanceof HTMLElement)) return;
+        const action = t.getAttribute('data-action');
+        if (!action) return;
+        const idx = Number(t.getAttribute('data-idx'));
+        if (action === 'remove') {
+          editableSteps.splice(idx, 1);
+        }
+        buildConfigUI();
+      });
+
+      elAddRowBtn.addEventListener('click', function() {
+        const nextId = (editableSteps.at(-1)?.id || 0) + 1;
+        editableSteps.push({ id: nextId, title: '新步骤', duration: 10, waterAmount: 0 });
+        buildConfigUI();
+      });
+
+      elApplyBtn.addEventListener('click', function() {
+        // 过滤非法，并重排 id
+        editableSteps = editableSteps.filter(s => (s && typeof s.title === 'string' && s.title.trim().length > 0));
+        editableSteps.forEach((s, i) => { s.id = i + 1; s.duration = Math.max(0, Math.floor(Number(s.duration) || 0)); s.waterAmount = Math.max(0, Math.floor(Number(s.waterAmount) || 0)); });
+
+        if (editableSteps.length === 0) {
+          // 至少保留一个占位步骤
+          editableSteps = [{ id: 1, title: '步骤 1', duration: 10, waterAmount: 0 }];
+        }
+
+        coffeeSteps = JSON.parse(JSON.stringify(editableSteps));
+        try { localStorage.setItem(STORAGE_STEPS, JSON.stringify(editableSteps)); } catch (e) {}
+        resetAll();
+        recalcTotals();
+      });
+
+      // 初始渲染
+      buildConfigUI();
+      renderHeader();
+    })();
+  </script>
 </body>
 </html>
+
+
