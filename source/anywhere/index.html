@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>手冲咖啡计时器（静态版）</title>
+  <title>☕️手冲咖啡计时器</title>
   <style>
     /* 基础样式，避免依赖构建工具或框架 */
     :root {
@@ -139,6 +139,13 @@
     .small-btn:active { transform: scale(.98); }
     .config-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
 
+    /* 计算器布局（移动端友好）*/
+    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 480px) { .calc-grid { grid-template-columns: 1fr; } }
+    .calc-item label { display: block; font-size: 12px; margin-bottom: 6px; color: var(--white); }
+    .calc-inline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .calc-note { font-size: 12px; opacity: .9; }
+
     .big-btn { color: var(--white); }
     .icon { display: inline-block; vertical-align: middle; }
   </style>
@@ -220,6 +227,50 @@
 
       <section id="tab-config" class="tab-panel">
       <div class="config-card">
+        <h3 class="config-title">计算器（按框架生成步骤）</h3>
+        <div class="calc-grid">
+          <div class="calc-item">
+            <label for="doseInput">粉量(g) 12-30</label>
+            <input id="doseInput" class="config-input" type="number" min="12" max="60" step="1" value="20" />
+          </div>
+          <div class="calc-item">
+            <label for="ratioInput">冲煮比例（1:n）</label>
+            <div class="calc-inline">
+              <span>1 :</span>
+              <input id="ratioInput" class="config-input" type="number" min="10" max="25" step="0.5" value="16" />
+            </div>
+          </div>
+          <div class="calc-item">
+            <label for="bloomRatioInput">闷蒸水量比例（倍数×粉量）</label>
+            <input id="bloomRatioInput" class="config-input" type="number" min="1" max="5" step="0.5" value="3" />
+          </div>
+          <div class="calc-item">
+            <label for="bloomTimeInput">闷蒸时间(s) 建议30-45</label>
+            <input id="bloomTimeInput" class="config-input" type="number" min="15" max="90" step="5" value="40" />
+          </div>
+          <div class="calc-item">
+            <label for="pourDurationInput">每次注水时间(s)</label>
+            <input id="pourDurationInput" class="config-input" type="number" min="10" max="60" step="5" value="20" />
+          </div>
+          <div class="calc-item">
+            <label for="dripTimeInput">滴滤时间(s)</label>
+            <input id="dripTimeInput" class="config-input" type="number" min="20" max="120" step="5" value="45" />
+          </div>
+          <div class="calc-item">
+            <label for="prewetTimeInput">预湿滤纸时间(s)</label>
+            <input id="prewetTimeInput" class="config-input" type="number" min="0" max="60" step="5" value="15" />
+          </div>
+          <div class="calc-item">
+            <label for="threePourThresholdInput">三段注水阈值(g 粉) 默认24</label>
+            <input id="threePourThresholdInput" class="config-input" type="number" min="0" max="60" step="1" value="24" />
+          </div>
+        </div>
+        <div class="config-actions">
+          <button id="genToTableBtn" class="small-btn">按框架生成到编辑表</button>
+          <button id="genAndApplyBtn" class="small-btn">生成并应用到计时器</button>
+        </div>
+      </div>
+      <div class="config-card">
         <h3 class="config-title">配置步骤（标题 / 秒 / 克）</h3>
         <div style="overflow-x:auto">
           <table class="config-table">
@@ -280,6 +331,17 @@
       const tabConfig = document.getElementById('tab-config');
       const elTotalDuration = document.getElementById('totalDuration');
       const elTotalWater = document.getElementById('totalWater');
+      // calc inputs
+      const doseInput = document.getElementById('doseInput');
+      const ratioInput = document.getElementById('ratioInput');
+      const bloomRatioInput = document.getElementById('bloomRatioInput');
+      const bloomTimeInput = document.getElementById('bloomTimeInput');
+      const pourDurationInput = document.getElementById('pourDurationInput');
+      const dripTimeInput = document.getElementById('dripTimeInput');
+      const prewetTimeInput = document.getElementById('prewetTimeInput');
+      const threePourThresholdInput = document.getElementById('threePourThresholdInput');
+      const genToTableBtn = document.getElementById('genToTableBtn');
+      const genAndApplyBtn = document.getElementById('genAndApplyBtn');
 
       function recalcTotals() {
         const totalDurationVal = coffeeSteps.reduce((acc, s) => acc + (Number(s.duration) || 0), 0);
@@ -478,6 +540,52 @@
         resetAll();
         recalcTotals();
       });
+
+      function generateFrameworkSteps() {
+        const dose = Math.max(1, Math.floor(Number(doseInput?.value) || 20));
+        const ratio = Math.max(1, Number(ratioInput?.value) || 16);
+        const bloomRatio = Math.max(0, Number(bloomRatioInput?.value) || 3);
+        const bloomTime = Math.max(0, Math.floor(Number(bloomTimeInput?.value) || 40));
+        const pourDuration = Math.max(5, Math.floor(Number(pourDurationInput?.value) || 20));
+        const dripTime = Math.max(0, Math.floor(Number(dripTimeInput?.value) || 45));
+        const prewetTime = Math.max(0, Math.floor(Number(prewetTimeInput?.value) || 15));
+        const threePourThreshold = Math.max(0, Math.floor(Number(threePourThresholdInput?.value) || 24));
+
+        const totalWater = Math.round(dose * ratio);
+        const bloomWater = Math.round(dose * bloomRatio);
+        const remaining = Math.max(0, totalWater - bloomWater);
+        const pourCount = dose > threePourThreshold ? 3 : 2;
+        const perPour = Math.floor(remaining / pourCount);
+        const lastPour = remaining - perPour * (pourCount - 1);
+
+        const steps = [];
+        if (prewetTime > 0) steps.push({ id: 1, title: '预湿滤纸', duration: prewetTime, waterAmount: 0 });
+        steps.push({ id: steps.length + 1, title: '闷蒸', duration: bloomTime, waterAmount: bloomWater });
+        for (let i = 0; i < pourCount; i++) {
+          const water = i === pourCount - 1 ? lastPour : perPour;
+          steps.push({ id: steps.length + 1, title: `第${i + 1}次注水`, duration: pourDuration, waterAmount: water });
+        }
+        if (dripTime > 0) steps.push({ id: steps.length + 1, title: '滴滤完成', duration: dripTime, waterAmount: 0 });
+        steps.forEach((s, idx) => s.id = idx + 1);
+        return steps;
+      }
+
+      if (genToTableBtn && genAndApplyBtn) {
+        genToTableBtn.addEventListener('click', function() {
+          const steps = generateFrameworkSteps();
+          editableSteps = steps;
+          buildConfigUI();
+        });
+        genAndApplyBtn.addEventListener('click', function() {
+          const steps = generateFrameworkSteps();
+          editableSteps = steps;
+          buildConfigUI();
+          elApplyBtn.click();
+          // 切回计时器页
+          const timerBtn = tabButtons.find(b => b.getAttribute('data-tab') === 'timer');
+          timerBtn && timerBtn.click();
+        });
+      }
 
       // 初始渲染
       buildConfigUI();
