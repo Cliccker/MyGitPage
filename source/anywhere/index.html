@@ -201,15 +201,25 @@
             </button>
           </div>
 
-          <div class="stats">
+          <div class="stats" style="overflow-x:auto;gap:8px;white-space:nowrap;">
             <div class="stat">
-              <div class="label">总时长</div>
-              <div class="value" id="totalDuration">—</div>
+              <div class="label">总粉量</div>
+              <div class="value" id="totalDose">—</div>
             </div>
             <div class="divider"></div>
             <div class="stat">
               <div class="label">总水量</div>
               <div class="value" id="totalWater">—</div>
+            </div>
+            <div class="divider"></div>
+            <div class="stat">
+              <div class="label">水粉比</div>
+              <div class="value" id="totalRatio">—</div>
+            </div>
+            <div class="divider"></div>
+            <div class="stat">
+              <div class="label">总时长</div>
+              <div class="value" id="totalDuration">—</div>
             </div>
           </div>
 
@@ -231,7 +241,7 @@
         <div class="calc-grid">
           <div class="calc-item">
             <label for="doseInput">粉量(g) 12-30</label>
-            <input id="doseInput" class="config-input" type="number" min="12" max="60" step="1" value="20" />
+            <input id="doseInput" class="config-input" type="number" min="12" max="60" step="1" value="15" />
           </div>
           <div class="calc-item">
             <label for="ratioInput">冲煮比例（1:n）</label>
@@ -253,8 +263,8 @@
             <input id="pourDurationInput" class="config-input" type="number" min="10" max="60" step="5" value="20" />
           </div>
           <div class="calc-item">
-            <label for="dripTimeInput">滴滤时间(s)</label>
-            <input id="dripTimeInput" class="config-input" type="number" min="20" max="120" step="5" value="45" />
+            <label for="perPourDripInput">每段滴滤时间(s)</label>
+            <input id="perPourDripInput" class="config-input" type="number" min="0" max="90" step="5" value="20" />
           </div>
           <div class="calc-item">
             <label for="prewetTimeInput">预湿滤纸时间(s)</label>
@@ -301,10 +311,9 @@
 
       let coffeeSteps = [
         { id: 1, title: "预湿滤纸", duration: 15,  waterAmount: 0 },
-        { id: 2, title: "闷蒸",     duration: 40, waterAmount: 60 },
-        { id: 3, title: "第1次注水", duration: 20, waterAmount: 130 },
-        { id: 4, title: "第2次注水", duration: 20, waterAmount: 130 },
-        { id: 5, title: "滴滤完成",   duration: 45, waterAmount: 0  },
+        { id: 2, title: "闷蒸",     duration: 40, waterAmount: 45 },
+        { id: 3, title: "第1次注水", duration: 40, waterAmount: 120 },
+        { id: 4, title: "第2次注水", duration: 40, waterAmount: 75 }
       ];
 
       // 状态
@@ -336,17 +345,33 @@
       const bloomRatioInput = document.getElementById('bloomRatioInput');
       const bloomTimeInput = document.getElementById('bloomTimeInput');
       const pourDurationInput = document.getElementById('pourDurationInput');
-      const dripTimeInput = document.getElementById('dripTimeInput');
+      const perPourDripInput = document.getElementById('perPourDripInput');
       const prewetTimeInput = document.getElementById('prewetTimeInput');
       const threePourThresholdInput = document.getElementById('threePourThresholdInput');
       const genToTableBtn = document.getElementById('genToTableBtn');
       const genAndApplyBtn = document.getElementById('genAndApplyBtn');
 
       function recalcTotals() {
-        const totalDurationVal = coffeeSteps.reduce((acc, s) => acc + (Number(s.duration) || 0), 0);
+        // 计算总水量、总粉量、总时长
         const totalWaterVal = coffeeSteps.reduce((acc, s) => acc + (Number(s.waterAmount) || 0), 0);
-        elTotalDuration.textContent = totalDurationVal + 's';
-        elTotalWater.textContent = totalWaterVal + 'g';
+        const totalDurationVal = coffeeSteps.reduce((acc, s) => acc + (Number(s.duration) || 0), 0);
+        // 总粉量来源于闷蒸步的水量/bloomRatio 或配置器输入（尽量推导出真实粉量）
+        let totalDose = 0;
+        let ratioVal = 16;
+        if (typeof doseInput !== 'undefined' && Number(doseInput?.value)) {
+          totalDose = Number(doseInput.value);
+          ratioVal = Math.round(totalWaterVal / (totalDose || 1));
+        } else if (coffeeSteps.length > 1 && coffeeSteps[1].title.includes('闷蒸')) {
+          // 如果表中有闷蒸，根据闷蒸水量和倍数反推粉量
+          const bloomWater = Number(coffeeSteps[1].waterAmount) || 0;
+          const bloomRatio = Number(bloomRatioInput?.value)||3;
+          totalDose = (bloomWater && bloomRatio)? Math.round(bloomWater / bloomRatio): 0;
+          ratioVal = Math.round(totalWaterVal / (totalDose || 1));
+        }
+        document.getElementById('totalDose').textContent = totalDose ? totalDose + 'g' : '—';
+        document.getElementById('totalWater').textContent = totalWaterVal ? totalWaterVal + 'g' : '—';
+        document.getElementById('totalRatio').textContent = ratioVal ? ratioVal + ':1' : '—';
+        document.getElementById('totalDuration').textContent = totalDurationVal ? formatTime(totalDurationVal) : '—';
       }
       function normalizeSteps(raw) {
         if (!Array.isArray(raw)) return null;
@@ -546,7 +571,7 @@
         const bloomRatio = Math.max(0, Number(bloomRatioInput?.value) || 3);
         const bloomTime = Math.max(0, Math.floor(Number(bloomTimeInput?.value) || 40));
         const pourDuration = Math.max(5, Math.floor(Number(pourDurationInput?.value) || 20));
-        const dripTime = Math.max(0, Math.floor(Number(dripTimeInput?.value) || 45));
+        const perPourDrip = Math.max(0, Math.floor(Number(perPourDripInput?.value) || 20));
         const prewetTime = Math.max(0, Math.floor(Number(prewetTimeInput?.value) || 15));
         const threePourThreshold = Math.max(0, Math.floor(Number(threePourThresholdInput?.value) || 24));
 
@@ -562,9 +587,8 @@
         steps.push({ id: steps.length + 1, title: '闷蒸', duration: bloomTime, waterAmount: bloomWater });
         for (let i = 0; i < pourCount; i++) {
           const water = i === pourCount - 1 ? lastPour : perPour;
-          steps.push({ id: steps.length + 1, title: `第${i + 1}次注水`, duration: pourDuration, waterAmount: water });
+          steps.push({ id: steps.length + 1, title: `第${i + 1}次注水`, duration: pourDuration + perPourDrip, waterAmount: water });
         }
-        if (dripTime > 0) steps.push({ id: steps.length + 1, title: '滴滤完成', duration: dripTime, waterAmount: 0 });
         steps.forEach((s, idx) => s.id = idx + 1);
         return steps;
       }
