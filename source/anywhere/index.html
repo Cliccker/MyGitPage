@@ -322,6 +322,7 @@
       let stepTime = 0;     // 当前步骤计时（秒）
       let totalTime = 0;    // 总计时（秒）
       let intervalId = null;
+      let wakeLock = null;  // Wake Lock 对象
 
       // DOM 引用
       const elCurrentStepName = document.getElementById('currentStepName');
@@ -412,6 +413,99 @@
         return m + ':' + s;
       }
 
+      // Wake Lock 功能
+      async function requestWakeLock() {
+        if ('wakeLock' in navigator) {
+          try {
+            wakeLock = await navigator.wakeLock.request('screen');
+            console.log('屏幕唤醒锁已激活');
+            
+            // 监听页面可见性变化，重新获取锁
+            wakeLock.addEventListener('release', () => {
+              console.log('屏幕唤醒锁已释放');
+              // 如果计时器还在运行，重新获取锁
+              if (isRunning) {
+                requestWakeLock();
+              }
+            });
+          } catch (err) {
+            console.error('获取屏幕唤醒锁失败:', err);
+            // 如果 Wake Lock API 失败，使用备用方法
+            fallbackNoSleep();
+          }
+        } else {
+          // 浏览器不支持 Wake Lock API，使用备用方法
+          fallbackNoSleep();
+        }
+      }
+
+      function releaseWakeLock() {
+        if (wakeLock !== null) {
+          wakeLock.release();
+          wakeLock = null;
+          console.log('屏幕唤醒锁已手动释放');
+        }
+        // 清理备用方法
+        cleanupFallbackNoSleep();
+      }
+
+      // 备用不休眠方法（兼容性更好）
+      let noSleepVideo = null;
+      let noSleepInterval = null;
+
+      function fallbackNoSleep() {
+        // 方法1: 播放静音视频
+        if (!noSleepVideo) {
+          noSleepVideo = document.createElement('video');
+          noSleepVideo.setAttribute('playsinline', '');
+          noSleepVideo.setAttribute('muted', '');
+          noSleepVideo.style.position = 'absolute';
+          noSleepVideo.style.left = '-100%';
+          noSleepVideo.style.width = '1px';
+          noSleepVideo.style.height = '1px';
+          
+          // 创建空白视频源
+          const canvas = document.createElement('canvas');
+          canvas.width = 1;
+          canvas.height = 1;
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = 'black';
+          ctx.fillRect(0, 0, 1, 1);
+          
+          canvas.toBlob(function(blob) {
+            const url = URL.createObjectURL(blob);
+            noSleepVideo.src = url;
+            noSleepVideo.play().catch(() => {});
+          });
+          
+          document.body.appendChild(noSleepVideo);
+        }
+
+        // 方法2: 定期小交互防止休眠
+        if (!noSleepInterval) {
+          noSleepInterval = setInterval(() => {
+            // 小交互来保持屏幕唤醒
+            if (noSleepVideo) {
+              noSleepVideo.currentTime = 0;
+            }
+          }, 30000); // 每30秒一次
+        }
+        
+        console.log('使用备用方法防止屏幕休眠');
+      }
+
+      function cleanupFallbackNoSleep() {
+        if (noSleepInterval) {
+          clearInterval(noSleepInterval);
+          noSleepInterval = null;
+        }
+        if (noSleepVideo) {
+          noSleepVideo.pause();
+          noSleepVideo.remove();
+          noSleepVideo = null;
+        }
+      }
+
       function renderHeader() {
         const step = coffeeSteps[currentStepIndex];
         elCurrentStepName.textContent = step.title;
@@ -478,12 +572,16 @@
         isRunning = true;
         intervalId = setInterval(tick, 100);
         renderHeader();
+        // 请求屏幕唤醒锁
+        requestWakeLock();
       }
 
       function pause() {
         isRunning = false;
         if (intervalId) { clearInterval(intervalId); intervalId = null; }
         renderHeader();
+        // 释放屏幕唤醒锁
+        releaseWakeLock();
       }
 
       function toggleStartPause() { isRunning ? pause() : start(); }
@@ -494,6 +592,8 @@
         stepTime = 0;
         totalTime = 0;
         renderHeader();
+        // 确保释放屏幕唤醒锁
+        releaseWakeLock();
       }
 
       elMainBtn.addEventListener('click', toggleStartPause);
