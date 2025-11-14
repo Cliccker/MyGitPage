@@ -1,8 +1,0 @@
-{
-  "name": "手冲咖啡计时器",
-  "short_name": "咖啡计时",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#78350f",
-  "theme_color": "#78350f"
-}
